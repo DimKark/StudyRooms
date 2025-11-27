@@ -35,16 +35,23 @@ public class Person {
     @Column(name = "created_at", nullable = false, updatable = false)
     private Instant createdAt;
 
-    public Person() {}
+    public Person() {
+        this.id = null;
+        this.firstName = "";
+        this.lastName = "";
+        this.email = "";
+        this.phoneNumber = "";
+        this.createdAt = Instant.now();
+    }
 
-    public Person(Long id, String firstName, String lastName, String email,
-                  String phoneNumber, String s, String string, Instant createdAt) {
-        this.id = id;
+    public Person(String firstName, String lastName, String email,
+                  String phoneNumber, String s, String string) {
+        this.id = null;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.phoneNumber = phoneNumber;
-        this.createdAt = createdAt;
+        this.createdAt = Instant.now();
     }
 
     public Long getId() {

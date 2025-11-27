@@ -23,14 +23,7 @@ public class RegistrationController {
     @GetMapping("/register")
     public String showRegistrationForm(final Model model) {
         // todo if user is auth, redirect to default view.
-        final Person person = new Person(
-                null,
-                "",
-                "", "",
-                "", "",
-                "",
-                null
-        );
+        final Person person = new Person();
         model.addAttribute("person", person);
         return "register"; // This loads register.html
     }
