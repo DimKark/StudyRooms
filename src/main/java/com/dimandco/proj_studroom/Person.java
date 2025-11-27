@@ -38,7 +38,7 @@ public class Person {
     public Person() {}
 
     public Person(Long id, String firstName, String lastName, String email,
-                  String phoneNumber, Instant createdAt) {
+                  String phoneNumber, String s, String string, Instant createdAt) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
