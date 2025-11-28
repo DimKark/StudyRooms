@@ -1,22 +1,20 @@
 package com.dimandco.proj_studroom.web;
 
-import com.dimandco.proj_studroom.Person;
-import com.dimandco.proj_studroom.PersonRepository;
+import com.dimandco.proj_studroom.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.http.HttpStatus;
 
 @Controller
 public class RegistrationController {
 
-    private final PersonRepository personRepository;
+    private final PersonService personRepository;
 
-    public RegistrationController(PersonRepository personRepository) {
-        if (personRepository == null) throw new NullPointerException();
-        this.personRepository = personRepository;
+    public RegistrationController(PersonService personService) {
+        if (personService == null) throw new NullPointerException();
+        this.personService = personService;
     }
 
     // Show registration form
@@ -24,7 +22,7 @@ public class RegistrationController {
     public String showRegistrationForm(final Model model) {
         // todo if user is auth, redirect to default view.
         final Person person = new Person();
-        model.addAttribute("person", person);
+        model.addAttribute("person", new CreatePersonRequest(PersonType.STUDENT, "", "", "", "", ""));
         return "register"; // This loads register.html
     }
 

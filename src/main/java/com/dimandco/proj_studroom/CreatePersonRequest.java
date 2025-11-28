@@ -1,4 +1,11 @@
 package com.dimandco.proj_studroom;
 
-public class CreatePersonRequest {
+public record CreatePersonRequest(
+        PersonType type,
+        String id,
+        String firstName,
+        String lastName,
+        String email,
+        String phoneNumber
+){
 }

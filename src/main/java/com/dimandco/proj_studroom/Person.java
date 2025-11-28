@@ -12,6 +12,7 @@ import java.time.Instant;
 /**
  * Person entity.
  */
+
 @Entity
 @Table(name = "person", uniqueConstraints = {}, indexes = {})
 public class Person {
