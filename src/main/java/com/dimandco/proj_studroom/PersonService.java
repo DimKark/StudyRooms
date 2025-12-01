@@ -6,7 +6,10 @@ import com.dimandco.proj_studroom.PersonView;
 import java.util.List;
 
 public interface PersonService {
-    list<PersonView> getPeople();
 
-    PersonView createper(CreatePersonRequest createpereq);
+    CreatePersonResult createPerson(final CreatePersonRequest createPersonRequest, final boolean notify);
+
+    default CreatePersonResult createPerson(final CreatePersonRequest createPersonRequest) {
+        return this.createPerson(createPersonRequest, true);
+    }
 }

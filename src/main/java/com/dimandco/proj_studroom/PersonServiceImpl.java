@@ -13,10 +13,14 @@ import java.util.List;
 public final class PersonServiceImpl implements PersonService {
     @Service
     private final PersonRepository personRepository;
+    private final PersonMapper personMapper;
 
-    public PersonServiceImpl(PersonRepository personRepository) {
+    public PersonServiceImpl(final PersonRepository personRepository, final PersonMapper personMapper) {
         if (personRepository == null) throw new NullPointerException();
+        if (personMapper == null) throw new NullPointerException();
+
         this.personRepository = personRepository;
+        this.personMapper = personMapper;
     }
 
     }
@@ -26,7 +30,7 @@ public final class PersonServiceImpl implements PersonService {
     }
 
     @Override
-    public PersonView createper(final CreatePersonRequest createpereq) {
+    public CreatePersonResult createPersonResult(final CreatePersonRequest createpereq) {
         if (createpereq == null) throw new NullPointerException();
 
         //[doubt] unpack the b*tch - after validation of course
@@ -39,6 +43,9 @@ public final class PersonServiceImpl implements PersonService {
         final String phoneNumber = createpereq.phoneNumber().strip();
 
         //TODO id, email, and phoneNumber have to be unique
+        if (!email.endsWith("@hua.gr")) {
+            return CreatePersonResult.fail("only academic emails are allowed. sorry.");
+        }
 
         //TODO use an external service for id validation
         // and encode a raw password to hash
@@ -54,12 +61,10 @@ public final class PersonServiceImpl implements PersonService {
         person.setPhoneNumber(phoneNumber);
         person.setCreatedAt(null);
 
-        person = this.PersonRepository.save(person);
+        person = this.personRepository.save(person);
 
-        final PersonView personView = null; //TODO Implement
+        final PersonView personView = this.personMapper.convertPersonToPersonView(person);
 
-
-
-        return null;
+        return CreatePersonResult.success(personView);
     }
 }

@@ -1,12 +1,14 @@
 package com.dimandco.proj_studroom;
 
-import com.dimandco.proj_studroom.PersonType;
-
-public class PersonView (
+public record PersonView (
         long id,
         String firstName,
         String lastName,
         String email,
         String phoneNumber,
         PersonType type
-) {}
+) {
+    public String fullName() {
+        return this.firstName + " " + this.lastName;
+    }
+}

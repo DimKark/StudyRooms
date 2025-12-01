@@ -1,11 +1,7 @@
 package com.dimandco.proj_studroom;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import org.hibernate.annotations.CreationTimestamp;
 import java.time.Instant;
 
@@ -14,7 +10,9 @@ import java.time.Instant;
  */
 
 @Entity
-@Table(name = "person", uniqueConstraints = {}, indexes = {})
+@Table(name = "person", uniqueConstraints = {}, indexes = {
+        @Index(name = "idx_person_type", columnList = "type")
+})
 public class Person {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -36,6 +34,11 @@ public class Person {
     @Column(name = "created_at", nullable = false, updatable = false)
     private Instant createdAt;
 
+    @NotNull
+    @Enumerated(EnumType.STRING)
+    @Column(name = "type", nullable = false, length = 20)
+    private PersonType type;
+
     public Person() {
         this.id = null;
         this.firstName = "";
@@ -43,16 +46,18 @@ public class Person {
         this.email = "";
         this.phoneNumber = "";
         this.createdAt = Instant.now();
+        this.type = "";
     }
 
     public Person(String firstName, String lastName, String email,
-                  String phoneNumber, String s, String string) {
+                  String phoneNumber, String s, String string, PersonType type) {
         this.id = null;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.phoneNumber = phoneNumber;
         this.createdAt = Instant.now();
+        this.type = type;
     }
 
     public Long getId() {
@@ -103,12 +108,21 @@ public class Person {
         this.createdAt = createdAt;
     }
 
+    public PersonType getType() {
+        return type;
+    }
+
+    public void setType(PersonType type) {
+        this.type = type;
+    }
+
     @Override
     public String toString() {
         return "ID: " + id
-                + "\nName: " +  firstName + " " + lastName
+                + "\nName: " + firstName + " " + lastName
                 + "\nEmail: " + email
                 + "\nPhone: " + phoneNumber
-                + "\nCreated at: " + createdAt.toString();
+                + "\nCreated at: " + createdAt.toString()
+                + "\nClassification:" + type;
     }
 }

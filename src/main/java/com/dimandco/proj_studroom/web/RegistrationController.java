@@ -1,6 +1,7 @@
 package com.dimandco.proj_studroom.web;
 
 import com.dimandco.proj_studroom.*;
+import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,9 +11,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class RegistrationController {
 
-    private final PersonService personRepository;
+    private final PersonService personService;
 
-    public RegistrationController(PersonService personService) {
+    public RegistrationController(final PersonService personService) {
         if (personService == null) throw new NullPointerException();
         this.personService = personService;
     }
@@ -28,7 +29,7 @@ public class RegistrationController {
 
 
     @PostMapping("/register")
-    public String handleFormSubmission(@ModelAttribute("person") Person person) {
+    public String handleFormSubmission(@ModelAttribute("person") Person person, @Valid @ModelAttribute("createPersonRequest") final CreatePersonRequest createPersonRequest, final Model model) {
         // TODO if form has errors, show form + errors
         // TODO if form is okay, store person, redirect.
 
@@ -47,9 +48,12 @@ public class RegistrationController {
         //if (this.personRepository.existsByHuaId(huaId)) {
         //    throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "HUA ID already exists");
         //}
-
-        person = this.personRepository.save(person);
-        System.out.println(person.toString());
+        final CreatePersonResult createPersonResult = this.personService.createPerson(createPersonRequest);
+        if (createPersonResult.created()) {
+            return "redirect:/login"; // registration is successfull, yay!!1!!1!!1
+        }
+        model.addAttribute("createPersonRequest", createPersonRequest); // Pass the same form data.
+        model.addAttribute("errorMessage", createPersonResult.reason()); // Show an error message!
         return "register";
     }
 }
