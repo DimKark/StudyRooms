@@ -46,7 +46,7 @@ public class Person {
         this.email = "";
         this.phoneNumber = "";
         this.createdAt = Instant.now();
-        this.type = "";
+        this.type = PersonType.STUDENT; // Default value can't be null because the field is not nullable
     }
 
     public Person(String firstName, String lastName, String email,
