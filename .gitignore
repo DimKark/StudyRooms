@@ -4,9 +4,6 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 
-### Local Database files ###
-LOCAL_DATA/h2/
-
 ### STS ###
 .apt_generated
 .classpath
