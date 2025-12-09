@@ -10,8 +10,8 @@ import java.util.List;
 
 //should be the implementation for the person created that handles the stuff or something - alex
 
-public final class PersonServiceImpl implements PersonService {
-    @Service
+@Service
+public class PersonServiceImpl implements PersonService {
     private final PersonRepository personRepository;
     private final PersonMapper personMapper;
 
@@ -23,13 +23,10 @@ public final class PersonServiceImpl implements PersonService {
         this.personMapper = personMapper;
     }
 
-    }
-    @Override
-    public list<PersonView> getPeople() {
-        return list.of();
+    public List<PersonView> getPeople() {
+        return List.of();
     }
 
-    @Override
     public CreatePersonResult createPersonResult(final CreatePersonRequest createpereq) {
         if (createpereq == null) throw new NullPointerException();
 
@@ -49,7 +46,7 @@ public final class PersonServiceImpl implements PersonService {
 
         //TODO use an external service for id validation
         // and encode a raw password to hash
-        final String hashedPass = rawPass;
+        //final String hashedPass = rawPass;
 
         // initiating person
         Person person = new Person();
@@ -66,5 +63,15 @@ public final class PersonServiceImpl implements PersonService {
         final PersonView personView = this.personMapper.convertPersonToPersonView(person);
 
         return CreatePersonResult.success(personView);
+    }
+
+    @Override
+    public CreatePersonResult createPerson(CreatePersonRequest createPersonRequest, boolean notify) {
+        return null;
+    }
+
+    @Override
+    public CreatePersonResult createPerson(CreatePersonRequest createPersonRequest) {
+        return PersonService.super.createPerson(createPersonRequest);
     }
 }
