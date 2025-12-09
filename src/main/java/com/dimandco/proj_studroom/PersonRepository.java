@@ -6,7 +6,7 @@ import java.util.*;
 
 @Repository
 public interface PersonRepository extends JpaRepository<Person, Long> {
-    Optional<Person> findById(final String id);
+    Optional<Person> findById(final Long id);
 
     List<Person> findAllByTypeOrderByLastName(final PersonType type);
 
