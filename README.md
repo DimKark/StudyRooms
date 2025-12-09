@@ -12,10 +12,6 @@ Clone this repository:
 ---
 Always run this before working on project
 ```shell
-    git pull origin master
-```
-or
-```shell
     git pull origin main
 ```
 ---
