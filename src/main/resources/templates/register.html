@@ -9,7 +9,29 @@
 
     <!-- Custom Styles -->
     <style>
-
+        .form-container {
+            margin: 0 auto;
+            max-width: 600px;
+            box-shadow:12px 12px black;
+            border: 4px solid black;
+        }
+        .form-control, .form-select {
+            border: 2px solid #9a9a9a;
+            border-radius: 0;
+        }
+        .form-label {
+            text-transform: uppercase;
+            margin-bottom: 2px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            color: #7c7c7c;
+            font-size: 12px;
+        }
+        .form-container .btn-primary {
+            background: black;
+            border: 0;
+            padding: 0.5em 4em;
+        }
     </style>
 </head>
 
@@ -63,6 +85,10 @@
                 <button type="submit" class="btn btn-primary">Create Account</button>
             </div>
         </form>
+
+        <p class="m-0 p-0">
+            <a th:href="@{/login}">Log In</a>
+        </p>
     </div>
 </section>
 
