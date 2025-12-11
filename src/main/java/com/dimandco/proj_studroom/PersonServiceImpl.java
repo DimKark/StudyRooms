@@ -1,15 +1,13 @@
 package com.dimandco.proj_studroom;
 
-import com.dimandco.proj_studroom.Person;
-import com.dimandco.proj_studroom.PersonService;
-import com.dimandco.proj_studroom.CreatePersonRequest;
 import org.springframework.stereotype.Service;
 
-import java.io.Serial;
+import java.time.Instant;
 import java.util.List;
 
-//should be the implementation for the person created that handles the stuff or something - alex
-
+/**
+ * Implementation of {@link PersonService}
+ */
 @Service
 public class PersonServiceImpl implements PersonService {
     private final PersonRepository personRepository;
@@ -24,54 +22,49 @@ public class PersonServiceImpl implements PersonService {
     }
 
     public List<PersonView> getPeople() {
-        return List.of();
+        return List.of(); // TODO Implement
     }
 
-    public CreatePersonResult createPersonResult(final CreatePersonRequest createpereq) {
-        if (createpereq == null) throw new NullPointerException();
+    /**
+    @Override
+    public CreatePersonResult createPerson(CreatePersonRequest createPersonRequest, boolean notify) {
+        return null;
+    }
+     */
 
-        //[doubt] unpack the b*tch - after validation of course
+    @Override
+    public CreatePersonResult createPerson(final CreatePersonRequest createPersonRequest) {
+        if(createPersonRequest == null) throw new NullPointerException();
 
-        final PersonType type = createpereq.type();
-        final String id = createpereq.id().strip();
-        final String firstName = createpereq.firstName().strip();
-        final String lastName = createpereq.lastName().strip();
-        final String email = createpereq.email().strip();
-        final String phoneNumber = createpereq.phoneNumber().strip();
+        // TODO Validate createPersonRequest
 
-        //TODO id, email, and phoneNumber have to be unique
-        if (!email.endsWith("@hua.gr")) {
-            return CreatePersonResult.fail("only academic emails are allowed. sorry.");
-        }
+        final PersonType type = createPersonRequest.type();
+        final String firstName = createPersonRequest.firstName().strip();
+        final String lastName = createPersonRequest.lastName().strip();
+        final String emailAddress = createPersonRequest.emailAddress().strip();
+        final String mobilePhoneNumber = createPersonRequest.mobilePhoneNumber().strip();
+        final String rawPassword = createPersonRequest.rawPassword().strip();
 
-        //TODO use an external service for id validation
-        // and encode a raw password to hash
-        //final String hashedPass = rawPass;
+        if(!emailAddress.endsWith("@hua.gr"))
+            return CreatePersonResult.fail("Email must end in '@hua.gr'");
 
-        // initiating person
+        // TODO Email must be unique
+        // TODO Phone number must be unique
+
+        final String hashedPassword = createPersonRequest.rawPassword().strip(); // TODO Encode password
+
         Person person = new Person();
-        person.setId(null); //auto generated
         person.setType(type);
         person.setFirstName(firstName);
         person.setLastName(lastName);
-        person.setEmail(email);
-        person.setPhoneNumber(phoneNumber);
-        person.setCreatedAt(null);
+        person.setEmailAddress(emailAddress);
+        person.setMobilePhoneNumber(mobilePhoneNumber);
+        person.setPasswordHash(hashedPassword);
 
         person = this.personRepository.save(person);
 
         final PersonView personView = this.personMapper.convertPersonToPersonView(person);
 
         return CreatePersonResult.success(personView);
-    }
-
-    @Override
-    public CreatePersonResult createPerson(CreatePersonRequest createPersonRequest, boolean notify) {
-        return null;
-    }
-
-    @Override
-    public CreatePersonResult createPerson(CreatePersonRequest createPersonRequest) {
-        return PersonService.super.createPerson(createPersonRequest);
     }
 }

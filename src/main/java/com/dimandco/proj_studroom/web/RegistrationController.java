@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.time.Instant;
+
 @Controller
 public class RegistrationController {
 
@@ -23,13 +25,17 @@ public class RegistrationController {
     public String showRegistrationForm(final Model model) {
         // todo if user is auth, redirect to default view.
         final Person person = new Person();
-        model.addAttribute("person", new CreatePersonRequest(PersonType.STUDENT, "", "", "", "", ""));
+        model.addAttribute("createPersonRequest", new CreatePersonRequest(PersonType.STUDENT,
+                null, "", "", "",
+                ""));
         return "register"; // This loads register.html
     }
 
 
     @PostMapping("/register")
-    public String handleFormSubmission(@ModelAttribute("person") Person person, @Valid @ModelAttribute("createPersonRequest") final CreatePersonRequest createPersonRequest, final Model model) {
+    public String handleFormSubmission(
+            @ModelAttribute("createPersonRequest") CreatePersonRequest createPersonRequest,
+            final Model model) {
         // TODO if form has errors, show form + errors
         // TODO if form is okay, store person, redirect.
 
@@ -48,12 +54,27 @@ public class RegistrationController {
         //if (this.personRepository.existsByHuaId(huaId)) {
         //    throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "HUA ID already exists");
         //}
+        /**
         final CreatePersonResult createPersonResult = this.personService.createPerson(createPersonRequest);
         if (createPersonResult.created()) {
             return "redirect:/login"; // registration is successfull, yay!!1!!1!!1
         }
         model.addAttribute("createPersonRequest", createPersonRequest); // Pass the same form data.
         model.addAttribute("errorMessage", createPersonResult.reason()); // Show an error message!
+        return "register";
+        */
+        final CreatePersonResult createPersonResult = this.personService.createPerson(createPersonRequest);
+
+        if(createPersonResult.created()){
+            return "redirect:/login";
+        }
+
+        // Retain form data on page reload
+        model.addAttribute("createPersonRequest", createPersonRequest);
+
+        //Show Error Message
+        model.addAttribute("errorMessage", createPersonResult.reason());
+
         return "register";
     }
 }

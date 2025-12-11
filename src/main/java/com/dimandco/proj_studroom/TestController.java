@@ -21,10 +21,10 @@ public class TestController {
     public String test() {
         Person person = new Person();
         person.setId(null); // auto-generated
-        person.setEmail("example@hua.gr");
+        person.setEmailAddress("example@hua.gr");
         person.setFirstName("ExampleFirstName");
         person.setLastName("ExampleLastName");
-        person.setPhoneNumber("+306900000000");
+        person.setMobilePhoneNumber("+306900000000");
         person.setCreatedAt(Instant.now());
 
         person = this.personRepository.save(person);

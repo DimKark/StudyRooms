@@ -1,5 +1,8 @@
 package com.dimandco.proj_studroom;
 
+/**
+ * Simple record for exposing {@link Person} info
+ */
 public record PersonView (
         long id,
         String firstName,

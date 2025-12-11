@@ -1,15 +1,13 @@
 package com.dimandco.proj_studroom;
 
-import com.dimandco.proj_studroom.Person;
-import com.dimandco.proj_studroom.CreatePersonRequest;
-import com.dimandco.proj_studroom.PersonView;
 import java.util.List;
 
+/**
+ * Service for managing students/ teachers
+ */
 public interface PersonService {
 
-    CreatePersonResult createPerson(final CreatePersonRequest createPersonRequest, final boolean notify);
+    List<PersonView> getPeople();
 
-    default CreatePersonResult createPerson(final CreatePersonRequest createPersonRequest) {
-        return this.createPerson(createPersonRequest, true);
-    }
+    CreatePersonResult createPerson(CreatePersonRequest createPersonRequest);
 }

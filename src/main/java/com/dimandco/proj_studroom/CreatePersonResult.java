@@ -1,8 +1,10 @@
 package com.dimandco.proj_studroom;
 
-public record CreatePersonResult(    boolean created,
-                                     String reason,
-                                     PersonView personView) {
+public record CreatePersonResult(
+        boolean created,
+        String reason,
+        PersonView personView)
+{
     public static CreatePersonResult success(final PersonView personView) {
         if (personView == null) throw new NullPointerException();
         return new CreatePersonResult(true, null, personView);
@@ -13,5 +15,4 @@ public record CreatePersonResult(    boolean created,
         if (reason.isBlank()) throw new IllegalArgumentException();
         return new CreatePersonResult(false, reason, null);
     }
-
 }
