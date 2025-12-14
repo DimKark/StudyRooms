@@ -1,5 +1,9 @@
 package com.dimandco.proj_studroom;
 
+import com.dimandco.proj_studroom.port.LookupPort;
+import com.dimandco.proj_studroom.port.SmsNotificationPort;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
@@ -7,16 +11,26 @@ import java.util.List;
 
 /**
  * Implementation of {@link PersonService}
+ * commented out some things for when we are ready to implement sms notification
  */
 @Service
 public class PersonServiceImpl implements PersonService {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(PersonServiceImpl.class);
+
+    private final LookupPort lookupPort;
+    //private final SmsNotificationPort smsNotificationPort;
     private final PersonRepository personRepository;
     private final PersonMapper personMapper;
 
-    public PersonServiceImpl(final PersonRepository personRepository, final PersonMapper personMapper) {
+    public PersonServiceImpl(final LookupPort lookupPport/**, final SmsNotificationPort smsNotificationPort*/,final PersonRepository personRepository, final PersonMapper personMapper) {
+        if (lookupPport == null) throw new IllegalArgumentException();
+        //if (smsNotificationPort == null) throw new IllegalArgumentException();
         if (personRepository == null) throw new NullPointerException();
         if (personMapper == null) throw new NullPointerException();
 
+        this.lookupPort = lookupPport;
+        //this.smsNotificationPort = smsNotificationPort;
         this.personRepository = personRepository;
         this.personMapper = personMapper;
     }
@@ -45,11 +59,39 @@ public class PersonServiceImpl implements PersonService {
         final String mobilePhoneNumber = createPersonRequest.mobilePhoneNumber().strip();
         final String rawPassword = createPersonRequest.rawPassword().strip();
 
+        // ------------------------------------------
+
+        if (type == PersonType.STAFF) {
+            return CreatePersonResult.fail("Not supported role");
+        }
+
+        // -------------------------------------------
+
         if(!emailAddress.endsWith("@hua.gr"))
             return CreatePersonResult.fail("Email must end in '@hua.gr'");
 
-        // TODO Email must be unique
-        // TODO Phone number must be unique
+        if (this.personRepository.existsByEmailAddressIgnoreCase(emailAddress)) {
+            return CreatePersonResult.fail("Email address must be unique");
+        }
+
+        if (this.personRepository.existsByMobilePhoneNumber(mobilePhoneNumber)) {
+            return CreatePersonResult.fail("Mobile Phone number must be unique");
+        }
+
+        // -------------------------------------------
+
+        /*
+        * Uncomment when huaId is added
+        * final PersonType persontype$Lookup = this.lookupPort.lookup(huaId).orElse(null);
+        if (persontype$Lookup == null) {
+            return CreatePersonResult.fail("Invalid HUA ID");
+        }
+        if (persontype$Lookup != type) {
+            return CreatePersonResult.fail("The provided person type does not match the actual one");
+        }
+        *
+        */
+        // -------------------------------------------
 
         final String hashedPassword = createPersonRequest.rawPassword().strip(); // TODO Encode password
 
@@ -62,6 +104,16 @@ public class PersonServiceImpl implements PersonService {
         person.setPasswordHash(hashedPassword);
 
         person = this.personRepository.save(person);
+
+        // ----------------------------
+
+        final String content = String.format("You have successfully registered for Study Rooms application. " +
+                "Use your email (%s) to login.", emailAddress);
+        //final boolean sent = this.smsNotificationPort.sendSms(mobilePhoneNumber, content);
+        //if (!sent) {
+        //    LOGGER.warn("SMS sent to {} failed", mobilePhoneNumber);
+        //}
+
 
         final PersonView personView = this.personMapper.convertPersonToPersonView(person);
 
