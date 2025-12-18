@@ -7,6 +7,7 @@ import java.time.Instant;
  */
 public record CreatePersonRequest(
         PersonType type,
+        String huaId,
         String firstName,
         String lastName,
         String emailAddress,

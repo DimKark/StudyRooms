@@ -23,13 +23,13 @@ public class PersonServiceImpl implements PersonService {
     private final PersonRepository personRepository;
     private final PersonMapper personMapper;
 
-    public PersonServiceImpl(final LookupPort lookupPport/**, final SmsNotificationPort smsNotificationPort*/,final PersonRepository personRepository, final PersonMapper personMapper) {
-        if (lookupPport == null) throw new IllegalArgumentException();
+    public PersonServiceImpl(final LookupPort lookupPort/**, final SmsNotificationPort smsNotificationPort*/,final PersonRepository personRepository, final PersonMapper personMapper) {
+        if (lookupPort == null) throw new IllegalArgumentException();
         //if (smsNotificationPort == null) throw new IllegalArgumentException();
         if (personRepository == null) throw new NullPointerException();
         if (personMapper == null) throw new NullPointerException();
 
-        this.lookupPort = lookupPport;
+        this.lookupPort = lookupPort;
         //this.smsNotificationPort = smsNotificationPort;
         this.personRepository = personRepository;
         this.personMapper = personMapper;
@@ -53,6 +53,7 @@ public class PersonServiceImpl implements PersonService {
         // TODO Validate createPersonRequest
 
         final PersonType type = createPersonRequest.type();
+        final String huaId = createPersonRequest.huaId().strip();
         final String firstName = createPersonRequest.firstName().strip();
         final String lastName = createPersonRequest.lastName().strip();
         final String emailAddress = createPersonRequest.emailAddress().strip();
@@ -80,23 +81,22 @@ public class PersonServiceImpl implements PersonService {
 
         // -------------------------------------------
 
-        /*
-        * Uncomment when huaId is added
-        * final PersonType persontype$Lookup = this.lookupPort.lookup(huaId).orElse(null);
-        if (persontype$Lookup == null) {
+        /**
+        final PersonType personType$Lookup = this.lookupPort.lookup(huaId).orElse(null);
+        if (personType$Lookup == null) {
             return CreatePersonResult.fail("Invalid HUA ID");
         }
-        if (persontype$Lookup != type) {
+        if (personType$Lookup != type) {
             return CreatePersonResult.fail("The provided person type does not match the actual one");
         }
-        *
-        */
+         */
         // -------------------------------------------
 
         final String hashedPassword = createPersonRequest.rawPassword().strip(); // TODO Encode password
 
         Person person = new Person();
         person.setType(type);
+        person.setHuaId(huaId);
         person.setFirstName(firstName);
         person.setLastName(lastName);
         person.setEmailAddress(emailAddress);

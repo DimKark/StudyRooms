@@ -15,6 +15,7 @@ public class PersonMapper {
 
         final PersonView personView = new PersonView (
                 person.getId(),
+                person.getHuaId(),
                 person.getFirstName(),
                 person.getLastName(),
                 person.getMobilePhoneNumber(),

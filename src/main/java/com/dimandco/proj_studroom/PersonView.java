@@ -5,6 +5,7 @@ package com.dimandco.proj_studroom;
  */
 public record PersonView (
         long id,
+        String huaId,
         String firstName,
         String lastName,
         String email,

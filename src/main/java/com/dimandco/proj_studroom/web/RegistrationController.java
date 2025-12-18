@@ -26,7 +26,7 @@ public class RegistrationController {
         // todo if user is auth, redirect to default view.
         final Person person = new Person();
         model.addAttribute("createPersonRequest", new CreatePersonRequest(PersonType.STUDENT,
-                null, "", "", "",
+                "", "", "", "", "",
                 ""));
         return "register"; // This loads register.html
     }

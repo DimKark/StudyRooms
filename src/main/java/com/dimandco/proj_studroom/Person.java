@@ -18,6 +18,9 @@ public class Person {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id; // Increments automatically
 
+    @Column(name = "huaId", nullable = false)
+    private String huaId;
+
     @Column(name = "first_name", nullable = false)
     private String firstName;
 
@@ -44,6 +47,7 @@ public class Person {
 
     public Person() {
         this.id = null;
+        this.huaId = "";
         this.firstName = "";
         this.lastName = "";
         this.emailAddress = "";
@@ -53,9 +57,10 @@ public class Person {
         this.type = PersonType.STUDENT; // Default value can't be null because the field is not nullable
     }
 
-    public Person(String firstName, String lastName, String emailAddress,
+    public Person(String huaId, String firstName, String lastName, String emailAddress,
                   String mobilePhoneNumber, String passwordhash, PersonType type) {
         this.id = null;
+        huaId = huaId;
         this.firstName = firstName;
         this.lastName = lastName;
         this.emailAddress = emailAddress;
@@ -72,6 +77,10 @@ public class Person {
     public void setId(Long id) {
         this.id = id;
     }
+
+    public String getHuaId() { return huaId; }
+
+    public void setHuaId(String huaId) { this.huaId = huaId; }
 
     public String getFirstName() {
         return firstName;
@@ -124,6 +133,7 @@ public class Person {
     @Override
     public String toString() {
         return "ID: " + id
+                + "\nHUA ID: " + huaId
                 + "\nName: " + firstName + " " + lastName
                 + "\nEmail: " + emailAddress
                 + "\nPhone: " + mobilePhoneNumber
