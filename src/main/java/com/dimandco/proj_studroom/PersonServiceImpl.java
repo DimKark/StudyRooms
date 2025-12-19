@@ -71,6 +71,10 @@ public class PersonServiceImpl implements PersonService {
         if(!emailAddress.endsWith("@hua.gr"))
             return CreatePersonResult.fail("Email must end in '@hua.gr'");
 
+        if (this.personRepository.existsByHuaId(huaId)) {
+            return CreatePersonResult.fail("Hua Id must be unique");
+        }
+
         if (this.personRepository.existsByEmailAddressIgnoreCase(emailAddress)) {
             return CreatePersonResult.fail("Email address must be unique");
         }

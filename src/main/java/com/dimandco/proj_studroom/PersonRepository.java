@@ -10,7 +10,10 @@ public interface PersonRepository extends JpaRepository<Person, Long> {
 
     List<Person> findAllByTypeOrderByLastName(final PersonType type);
 
+    boolean existsByHuaId(final String huaId);
+
     boolean existsByEmailAddressIgnoreCase(final String email);
 
     boolean existsByMobilePhoneNumber(final String phoneNumber);
+
 }
