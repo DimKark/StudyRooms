@@ -1,100 +1,73 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html
+    xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{base}">
+
 <head>
-    <title>Register</title>
-
-    <!-- Bootstrap -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
-
-    <!-- Custom Styles -->
-    <style>
-        .form-container {
-            margin: 0 auto;
-            max-width: 600px;
-            box-shadow:12px 12px black;
-            border: 4px solid black;
-        }
-        .form-control, .form-select {
-            border: 2px solid #9a9a9a;
-            border-radius: 0;
-        }
-        .form-label {
-            text-transform: uppercase;
-            margin-bottom: 2px;
-            font-weight: bold;
-            letter-spacing: 1px;
-            color: #7c7c7c;
-            font-size: 12px;
-        }
-        .form-container .btn-primary {
-            background: black;
-            border: 0;
-            padding: 0.5em 4em;
-        }
-    </style>
+    <title>Registration</title>
 </head>
 
 <body>
-<header class="text-center p-4">
+<header layout:fragment="header">
     <h1>Study Rooms <small>/ Registration</small></h1>
 </header>
 
-<section>
-    <div class="form-container p-4">
-        <form th:action="@{/register}" method="POST" th:object="${createPersonRequest}">
-            <!-- ERROR MESSAGE -->
-            <div class="text-center mb-3" th:if="${errorMessage != null}">
-                <p class="text-danger n-0 p-0" th:text="${errorMessage}"></p>
-            </div>
+<section layout:fragment="main">
 
-            <div class="mb-3">
-                <label class="form-label">Role: </label>
-                <select name="type" th:field="*{type}" class="form-select">
-                    <option value="STUDENT">STUDENT</option>
-                    <option value="STAFF">STAFF</option>
-                </select>
-            </div>
+    <form th:action="@{/register}" method="POST" th:object="${createPersonRequest}">
+        <!-- ERROR MESSAGE -->
+        <div class="text-center mb-3" th:if="${errorMessage != null}">
+            <p class="text-danger n-0 p-0" th:text="${errorMessage}"></p>
+        </div>
 
-            <div class="mb-3">
-                <label class="form-label">HUA ID: </label>
-                <input th:field="*{huaId}" class="form-control" required/>
-            </div>
+        <div class="mb-3">
+            <label class="form-label">Role: </label>
+            <select name="type" th:field="*{type}" class="form-select">
+                <option value="STUDENT">STUDENT</option>
+                <option value="STAFF">STAFF</option>
+            </select>
+        </div>
 
-            <div class="mb-3">
-                <label class="form-label">First Name: </label>
-                <input th:field="*{firstName}" class="form-control" required/>
-            </div>
+        <div class="mb-3">
+            <label class="form-label">HUA ID: </label>
+            <input th:field="*{huaId}" class="form-control" required/>
+        </div>
 
-            <div class="mb-3">
-                <label class="form-label">Last Name: </label>
-                <input th:field="*{lastName}"  class="form-control" required/>
-            </div>
+        <div class="mb-3">
+            <label class="form-label">First Name: </label>
+            <input th:field="*{firstName}" class="form-control" required/>
+        </div>
 
-            <div class="mb-3">
-                <label class="form-label">Email Address: </label>
-                <input th:field="*{emailAddress}" class="form-control" required/>
-            </div>
+        <div class="mb-3">
+            <label class="form-label">Last Name: </label>
+            <input th:field="*{lastName}"  class="form-control" required/>
+        </div>
 
-            <div class="mb-3">
-                <label class="form-label">Phone Number: </label>
-                <input th:field="*{mobilePhoneNumber}" class="form-control" required/>
-            </div>
+        <div class="mb-3">
+            <label class="form-label">Email Address: </label>
+            <input th:field="*{emailAddress}" class="form-control" required/>
+        </div>
 
-            <div class="mb-3">
-                <label class="form-label">Password: </label>
-                <input type="password" th:field="*{rawPassword}" class="form-control" required/>
-            </div>
+        <div class="mb-3">
+            <label class="form-label">Phone Number: </label>
+            <input th:field="*{mobilePhoneNumber}" class="form-control" required/>
+        </div>
 
-            <div class="mb-6">
-                <button type="submit" class="btn btn-primary">Create Account</button>
-            </div>
-        </form>
+        <div class="mb-3">
+            <label class="form-label">Password: </label>
+            <input type="password" th:field="*{rawPassword}" class="form-control" required/>
+        </div>
 
-        <p class="m-0 p-0">
-            <a th:href="@{/login}">Log In</a>
-        </p>
-    </div>
+        <div class="mb-6">
+            <button type="submit" class="btn btn-primary">Create Account</button>
+        </div>
+    </form>
+
+    <p class="m-0 p-0">
+        <a th:href="@{/login}">Log In</a>
+    </p>
+
 </section>
 
 </body>

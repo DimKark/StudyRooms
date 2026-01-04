@@ -1,4 +1,4 @@
-com\dimandco\proj_studroom\Person.class
-com\dimandco\proj_studroom\TestController.class
-com\dimandco\proj_studroom\StudyRoomsApplication.class
-com\dimandco\proj_studroom\PersonRepository.class
+com/dimandco/proj_studroom/web/ui/HomepageController.class
+com/dimandco/proj_studroom/web/ui/ProfileController.class
+com/dimandco/proj_studroom/config/SecurityConfig.class
+com/dimandco/proj_studroom/UserLookupResult.class

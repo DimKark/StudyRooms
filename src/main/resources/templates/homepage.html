@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{base}">
+
+<head>
+    <title>Home</title>
+</head>
+
+<body>
+<header layout:fragment="header">
+    <h1>Study Rooms</h1>
+    <h3>Reservation Tracker</h3>
+</header>
+
+<section layout:fragment="main">
+
+    <div class="mb-4">
+        <img src="https://kajabi-storefronts-production.kajabi-cdn.com/kajabi-storefronts-production/blogs/20044/images/VoNLCopMRhSPSTxOO4hQ_caleb-woods-fulXJYIvRi8-unsplash.jpg" style="width: 100%" />
+    </div>
+
+    <div>
+        <p>Sample Text</p>
+        <p>Sample Text</p>
+    </div>
+
+    <div class="text-center mt-4">
+        <p><a th:href="@{/login}">Log In</a></p>
+        <p><a th:href="@{/register}">Register</a></p>
+    </div>
+
+</section>

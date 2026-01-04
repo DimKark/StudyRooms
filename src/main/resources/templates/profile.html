@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{base}">
+
+<head>
+  <title>Profile</title>
+</head>
+
+<body>
+<header layout:fragment="header">
+  <h1>Study Rooms <small>/ Profile</small></h1>
+</header>
+
+<section layout:fragment="main">
+
+  <p>IN DEVELOPMENT</p>
+
+  <div>
+    <ul>
+      <li>Email <span>???</span></li>
+      <li>Role <span>???</span></li>
+    </ul>
+
+    <!-- TODO Display user data -->
+    <!--
+    <ul>
+      <li>Email <span th:text="${me.email()}">???</span></li>
+      <li>Role <span th:text="${me.type()}">???</span></li>
+    </ul>
+    -->
+
+    <hr>
+
+    <ul>
+      <li>
+        <a th:href="@{/profile}">Profile</a>
+      </li>
+      <li>
+        <a th:href="@{/logout}">Log Out</a>
+      </li>
+    </ul>
+  </div>
+
+</section>
