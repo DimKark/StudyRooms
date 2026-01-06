@@ -20,14 +20,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @Configuration
 @EnableMethodSecurity
 public class SecurityConfig {
-//                                  TO BE UNCOMMENTED
-
     // TODO API Security (stateless - JWT based)
 
-    /**
-     *  UI chain {@code "/**"} (stateful - cookie based)
-     */
-
+    /** UI chain {@code "/**"} (stateful - cookie based) */
     @Bean
     @Order(2)
     public SecurityFilterChain uiChain(final HttpSecurity http) throws Exception {

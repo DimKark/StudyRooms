@@ -12,6 +12,11 @@
 /home/dimk/lab/sem5/studyrooms/StudyRooms/src/main/java/com/dimandco/proj_studroom/UserLookupResult.java
 /home/dimk/lab/sem5/studyrooms/StudyRooms/src/main/java/com/dimandco/proj_studroom/config/RestApiClientConfig.java
 /home/dimk/lab/sem5/studyrooms/StudyRooms/src/main/java/com/dimandco/proj_studroom/config/SecurityConfig.java
+/home/dimk/lab/sem5/studyrooms/StudyRooms/src/main/java/com/dimandco/proj_studroom/core/security/AppicationUserDetailsService.java
+/home/dimk/lab/sem5/studyrooms/StudyRooms/src/main/java/com/dimandco/proj_studroom/core/security/ApplicationUserDetails.java
+/home/dimk/lab/sem5/studyrooms/StudyRooms/src/main/java/com/dimandco/proj_studroom/core/security/ApplicationUserDetailsService.java
+/home/dimk/lab/sem5/studyrooms/StudyRooms/src/main/java/com/dimandco/proj_studroom/core/security/CurrentUser.java
+/home/dimk/lab/sem5/studyrooms/StudyRooms/src/main/java/com/dimandco/proj_studroom/core/security/CurrentUserProvider.java
 /home/dimk/lab/sem5/studyrooms/StudyRooms/src/main/java/com/dimandco/proj_studroom/port/LookupPort.java
 /home/dimk/lab/sem5/studyrooms/StudyRooms/src/main/java/com/dimandco/proj_studroom/port/SmsNotificationPort.java
 /home/dimk/lab/sem5/studyrooms/StudyRooms/src/main/java/com/dimandco/proj_studroom/port/impl/LookupPortImpl.java
@@ -20,7 +25,9 @@
 /home/dimk/lab/sem5/studyrooms/StudyRooms/src/main/java/com/dimandco/proj_studroom/port/impl/dto/SendSmsRequest.java
 /home/dimk/lab/sem5/studyrooms/StudyRooms/src/main/java/com/dimandco/proj_studroom/port/impl/dto/SendSmsResult.java
 /home/dimk/lab/sem5/studyrooms/StudyRooms/src/main/java/com/dimandco/proj_studroom/port/impl/package-info.java
-/home/dimk/lab/sem5/studyrooms/StudyRooms/src/main/java/com/dimandco/proj_studroom/web/LoginController.java
 /home/dimk/lab/sem5/studyrooms/StudyRooms/src/main/java/com/dimandco/proj_studroom/web/RegistrationController.java
+/home/dimk/lab/sem5/studyrooms/StudyRooms/src/main/java/com/dimandco/proj_studroom/web/ui/AuthController.java
+/home/dimk/lab/sem5/studyrooms/StudyRooms/src/main/java/com/dimandco/proj_studroom/web/ui/AuthUtils.java
+/home/dimk/lab/sem5/studyrooms/StudyRooms/src/main/java/com/dimandco/proj_studroom/web/ui/AuthenticatedControllersAdvice.java
 /home/dimk/lab/sem5/studyrooms/StudyRooms/src/main/java/com/dimandco/proj_studroom/web/ui/HomepageController.java
 /home/dimk/lab/sem5/studyrooms/StudyRooms/src/main/java/com/dimandco/proj_studroom/web/ui/ProfileController.java

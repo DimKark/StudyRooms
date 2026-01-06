@@ -27,7 +27,7 @@ public class PersonServiceImpl implements PersonService {
 
     public PersonServiceImpl(final PasswordEncoder passwordEncoder,
                              final LookupPort lookupPort,
-                             //final SmsNotificationPort smsNotificationPort*/,
+                             final SmsNotificationPort smsNotificationPort,
                              final PersonRepository personRepository,
                              final PersonMapper personMapper) {
         if (passwordEncoder == null) throw new NullPointerException();
