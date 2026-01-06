@@ -2,7 +2,6 @@ package com.dimandco.proj_studroom.port.impl.dto;
 
 
 /**
- * sendSmsresult DTO
+ * SendSmsresult DTO
  */
-public record SendSmsResult(boolean sent) {
-}
+public record SendSmsResult(boolean sent) {}

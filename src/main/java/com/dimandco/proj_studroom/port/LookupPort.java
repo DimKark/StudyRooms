@@ -1,6 +1,5 @@
 package com.dimandco.proj_studroom.port;
 
-
 import com.dimandco.proj_studroom.Person;
 import com.dimandco.proj_studroom.PersonType;
 
@@ -12,5 +11,4 @@ import java.util.Optional;
 public interface LookupPort {
 
     Optional<PersonType> lookup(final String huaId);
-
 }

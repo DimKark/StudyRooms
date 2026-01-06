@@ -12,7 +12,6 @@ import org.springframework.web.client.RestTemplate;
 import java.util.Optional;
 /**
  * Default implementation of {@link LookupPort}. It uses the Noc external service
- * commented out stuff because we don't have the url
  */
 @Service
 public class LookupPortImpl implements LookupPort {
@@ -26,19 +25,18 @@ public class LookupPortImpl implements LookupPort {
 
     @Override
     public Optional<PersonType> lookup(final String huaId) {
-        //if (huaId == null) throw new NullPointerException();
-        //if (huaId.isBlank()) throw new IllegalArgumentException();
+        if (huaId == null) throw new NullPointerException();
+        if (huaId.isBlank()) throw new IllegalArgumentException();
 
-        //final String baseUrl = RestApiClientConfig.BASE_URL;
-        //final String url = baseUrl + "/api/v1/lookups/" + huaId;
-        //final ResponseEntity<LookupResult> response = this.restTemplate.getForEntity(url, LookupResult.class);
+        final String baseUrl = RestApiClientConfig.BASE_URL;
+        final String url = baseUrl + "/api/v1/lookups/" + huaId;
+        final ResponseEntity<LookupResult> response = this.restTemplate.getForEntity(url, LookupResult.class);
 
-        /**if (response.getStatusCode().is2xxSuccessful()) {
+        if (response.getStatusCode().is2xxSuccessful()) {
             final LookupResult lookupResult = response.getBody();
             if (lookupResult == null) throw new NullPointerException();
             return Optional.ofNullable(lookupResult.type());
-        }*/
-        //throw new RuntimeException("External service responded with " + response.getStatusCode());
-        return Optional.empty();
+        }
+        throw new RuntimeException("External service responded with " + response.getStatusCode());
     }
 }

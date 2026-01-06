@@ -12,7 +12,7 @@ public interface PersonRepository extends JpaRepository<Person, Long> {
 
     Optional<Person> findByEmailAddressIgnoreCase(final String emailAddress);
 
-    boolean existsByHuaId(final String huaId);
+    boolean existsByHuaIdIgnoreCase(final String huaId);
 
     boolean existsByEmailAddressIgnoreCase(final String email);
 

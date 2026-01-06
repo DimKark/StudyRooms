@@ -21,7 +21,7 @@ public class PersonServiceImpl implements PersonService {
 
     private final PasswordEncoder passwordEncoder;
     private final LookupPort lookupPort;
-    //private final SmsNotificationPort smsNotificationPort;
+    private final SmsNotificationPort smsNotificationPort;
     private final PersonRepository personRepository;
     private final PersonMapper personMapper;
 
@@ -32,13 +32,13 @@ public class PersonServiceImpl implements PersonService {
                              final PersonMapper personMapper) {
         if (passwordEncoder == null) throw new NullPointerException();
         if (lookupPort == null) throw new IllegalArgumentException();
-        //if (smsNotificationPort == null) throw new IllegalArgumentException();
+        if (smsNotificationPort == null) throw new IllegalArgumentException();
         if (personRepository == null) throw new NullPointerException();
         if (personMapper == null) throw new NullPointerException();
 
         this.passwordEncoder = passwordEncoder;
         this.lookupPort = lookupPort;
-        //this.smsNotificationPort = smsNotificationPort;
+        this.smsNotificationPort = smsNotificationPort;
         this.personRepository = personRepository;
         this.personMapper = personMapper;
     }
@@ -70,16 +70,10 @@ public class PersonServiceImpl implements PersonService {
 
         // ------------------------------------------
 
-        if (type == PersonType.STAFF) {
-            return CreatePersonResult.fail("Not supported role");
-        }
-
-        // -------------------------------------------
-
         if(!emailAddress.endsWith("@hua.gr"))
             return CreatePersonResult.fail("Email must end in '@hua.gr'");
 
-        if (this.personRepository.existsByHuaId(huaId)) {
+        if (this.personRepository.existsByHuaIdIgnoreCase(huaId)) {
             return CreatePersonResult.fail("Hua Id must be unique");
         }
 
@@ -93,7 +87,7 @@ public class PersonServiceImpl implements PersonService {
 
         // -------------------------------------------
 
-        /**
+        // Use external service to validate Hua ID and role
         final PersonType personType$Lookup = this.lookupPort.lookup(huaId).orElse(null);
         if (personType$Lookup == null) {
             return CreatePersonResult.fail("Invalid HUA ID");
@@ -101,7 +95,7 @@ public class PersonServiceImpl implements PersonService {
         if (personType$Lookup != type) {
             return CreatePersonResult.fail("The provided person type does not match the actual one");
         }
-         */
+
         // -------------------------------------------
 
         final String hashedPassword = this.passwordEncoder.encode(rawPassword);
@@ -121,10 +115,10 @@ public class PersonServiceImpl implements PersonService {
 
         final String content = String.format("You have successfully registered for Study Rooms application. " +
                 "Use your email (%s) to login.", emailAddress);
-        //final boolean sent = this.smsNotificationPort.sendSms(mobilePhoneNumber, content);
-        //if (!sent) {
-        //    LOGGER.warn("SMS sent to {} failed", mobilePhoneNumber);
-        //}
+        final boolean sent = this.smsNotificationPort.sendSms(mobilePhoneNumber, content);
+        if (!sent) {
+            LOGGER.warn("SMS sent to {} failed", mobilePhoneNumber);
+        }
 
 
         final PersonView personView = this.personMapper.convertPersonToPersonView(person);

@@ -48,7 +48,7 @@ public class SmsNotificationPortImpl implements SmsNotificationPort {
 
         if (response.getStatusCode().is2xxSuccessful()) {
             final SendSmsResult sendsmsresult = response.getBody();
-            if (sendsmsresult != null) throw new NullPointerException();
+            if (sendsmsresult == null) throw new NullPointerException();
             return sendsmsresult.sent();
         }
 
