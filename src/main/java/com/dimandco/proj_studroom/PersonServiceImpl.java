@@ -4,6 +4,7 @@ import com.dimandco.proj_studroom.port.LookupPort;
 import com.dimandco.proj_studroom.port.SmsNotificationPort;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
@@ -18,17 +19,24 @@ public class PersonServiceImpl implements PersonService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(PersonServiceImpl.class);
 
+    private final PasswordEncoder passwordEncoder;
     private final LookupPort lookupPort;
     //private final SmsNotificationPort smsNotificationPort;
     private final PersonRepository personRepository;
     private final PersonMapper personMapper;
 
-    public PersonServiceImpl(final LookupPort lookupPort/**, final SmsNotificationPort smsNotificationPort*/,final PersonRepository personRepository, final PersonMapper personMapper) {
+    public PersonServiceImpl(final PasswordEncoder passwordEncoder,
+                             final LookupPort lookupPort,
+                             //final SmsNotificationPort smsNotificationPort*/,
+                             final PersonRepository personRepository,
+                             final PersonMapper personMapper) {
+        if (passwordEncoder == null) throw new NullPointerException();
         if (lookupPort == null) throw new IllegalArgumentException();
         //if (smsNotificationPort == null) throw new IllegalArgumentException();
         if (personRepository == null) throw new NullPointerException();
         if (personMapper == null) throw new NullPointerException();
 
+        this.passwordEncoder = passwordEncoder;
         this.lookupPort = lookupPort;
         //this.smsNotificationPort = smsNotificationPort;
         this.personRepository = personRepository;
@@ -96,7 +104,7 @@ public class PersonServiceImpl implements PersonService {
          */
         // -------------------------------------------
 
-        final String hashedPassword = createPersonRequest.rawPassword().strip(); // TODO Encode password
+        final String hashedPassword = this.passwordEncoder.encode(rawPassword);
 
         Person person = new Person();
         person.setType(type);

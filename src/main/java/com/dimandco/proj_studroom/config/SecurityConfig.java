@@ -4,20 +4,21 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
 
-/* SECURITY DEPENDENCIES
+
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
- */
 
 
 /**
  * Security configuration.
  */
 @Configuration
-//@EnableMethodSecurity
+@EnableMethodSecurity
 public class SecurityConfig {
 //                                  TO BE UNCOMMENTED
 
@@ -26,7 +27,7 @@ public class SecurityConfig {
     /**
      *  UI chain {@code "/**"} (stateful - cookie based)
      */
-    /*
+
     @Bean
     @Order(2)
     public SecurityFilterChain uiChain(final HttpSecurity http) throws Exception {
@@ -46,7 +47,7 @@ public class SecurityConfig {
                 )
                 .logout(logout -> logout
                         .logoutUrl("/logout") // POST request target (handled by Spring Security)
-                        .logoutSuccessUrl("login?logout")
+                        .logoutSuccessUrl("/login?logout")
                         .deleteCookies("JSESSIONID")
                         .invalidateHttpSession(true)
                         .permitAll()
@@ -67,5 +68,5 @@ public class SecurityConfig {
         return config.getAuthenticationManager();
     }
 
-*/
+
 }

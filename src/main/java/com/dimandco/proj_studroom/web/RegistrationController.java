@@ -1,7 +1,9 @@
 package com.dimandco.proj_studroom.web;
 
 import com.dimandco.proj_studroom.*;
+import com.dimandco.proj_studroom.web.ui.AuthUtils;
 import jakarta.validation.Valid;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,8 +24,10 @@ public class RegistrationController {
 
     // Show registration form
     @GetMapping("/register")
-    public String showRegistrationForm(final Model model) {
-        // todo if user is auth, redirect to default view.
+    public String showRegistrationForm(final Authentication authentication, final Model model) {
+        if (AuthUtils.isAuthenticated(authentication)){
+            return "redirect:/profile";
+        }
         final Person person = new Person();
         model.addAttribute("createPersonRequest", new CreatePersonRequest(PersonType.STUDENT,
                 "", "", "", "", "",
@@ -34,26 +38,30 @@ public class RegistrationController {
 
     @PostMapping("/register")
     public String handleFormSubmission(
+            final Authentication authentication,
             @ModelAttribute("createPersonRequest") CreatePersonRequest createPersonRequest,
             final Model model) {
+        if (AuthUtils.isAuthenticated(authentication)){
+            return "redirect:/profile";
+        }
         // TODO if form has errors, show form + errors
         // TODO if form is okay, store person, redirect.
+        /**
+        final String emailAddress = person.getEmailAddress();
+        final String mobilePhoneNumber = person.getMobilePhoneNumber();
+        final String huaId = person.getHuaId();
 
-        //final String emailAddress = person.getEmailAddress();
-        //final String mobilePhoneNumber = person.getMobilePhoneNumber();
-        //final String huaId = person.getHuaId();
+        if (this.personRepository.existsByEmailAddressIgnoreCase(emailAddress)) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "email address already exists!");
+        }
 
-        //if (this.personRepository.existsByEmailAddressIgnoreCase(emailAddress)) {
-        //    throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "email address already exists!");
-        //}
+        if (this.personRepository.existsByMobilePhoneNumber(mobilePhoneNumber)) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "mobile phone number already exists");
+        }
 
-        //if (this.personRepository.existsByMobilePhoneNumber(mobilePhoneNumber)) {
-        //    throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "mobile phone number already exists");
-        //}
-
-        //if (this.personRepository.existsByHuaId(huaId)) {
-        //    throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "HUA ID already exists");
-        //}
+        if (this.personRepository.existsByHuaId(huaId)) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "HUA ID already exists");
+        }*/
         /**
         final CreatePersonResult createPersonResult = this.personService.createPerson(createPersonRequest);
         if (createPersonResult.created()) {
