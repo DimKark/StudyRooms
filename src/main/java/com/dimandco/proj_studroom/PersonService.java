@@ -9,5 +9,9 @@ public interface PersonService {
 
     List<PersonView> getPeople();
 
-    CreatePersonResult createPerson(CreatePersonRequest createPersonRequest);
+    CreatePersonResult createPerson(CreatePersonRequest createPersonRequest, final boolean notify);
+
+    default CreatePersonResult createPerson(final CreatePersonRequest createPersonRequest) {
+        return this.createPerson(createPersonRequest, true);
+    }
 }

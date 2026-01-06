@@ -120,7 +120,6 @@ public class PersonServiceImpl implements PersonService {
             LOGGER.warn("SMS sent to {} failed", mobilePhoneNumber);
         }
 
-
         final PersonView personView = this.personMapper.convertPersonToPersonView(person);
 
         return CreatePersonResult.success(personView);

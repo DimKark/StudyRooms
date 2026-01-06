@@ -1,8 +1,4 @@
-package com.dimandco.proj_studroom.core;
-
-import com.dimandco.proj_studroom.PersonService;
-import com.dimandco.proj_studroom.PersonType;
-import com.dimandco.proj_studroom.CreatePersonRequest;
+package com.dimandco.proj_studroom;
 
 import jakarta.annotation.PostConstruct;
 
@@ -10,7 +6,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import org.springframework.stereotype.Service;
-
 
 import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -33,10 +28,10 @@ public class InitializeService {
     public void populateDatabaseWithInitialData() {
         final boolean alreadyInitialized = this.initialized.getAndSet(true);
         if (alreadyInitialized) {
-            LOGGER.warn("Database initialization skipped: initial data has already been populated.");
+            LOGGER.warn("Database initialization skipped: initial data already exist");
             return;
         }
-        LOGGER.info("Starting database initialization with initial data...");
+        LOGGER.info("Starting database initialization...");
         final List<CreatePersonRequest> createPersonRequestList = List.of(
                 new CreatePersonRequest(
                         PersonType.STAFF,
@@ -67,9 +62,8 @@ public class InitializeService {
                 )
         );
         for (final var createPersonRequest : createPersonRequestList) {
-            this.personService.createPerson(createPersonRequest); // do not send SMS
+            this.personService.createPerson(createPersonRequest, false); // do not send SMS
         }
-        LOGGER.info("Database initialization completed successfully.");
+        LOGGER.info("Database initialization completed.");
     }
-
 }
