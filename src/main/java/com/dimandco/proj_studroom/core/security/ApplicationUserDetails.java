@@ -1,14 +1,12 @@
 package com.dimandco.proj_studroom.core.security;
 
-import com.dimandco.proj_studroom.Person;
-import com.dimandco.proj_studroom.PersonType;
+import com.dimandco.proj_studroom.core.model.PersonType;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 import java.util.Collections;
-import java.util.List;
 
 /**
  * Immutable view implementing Spring's {@link UserDetails} for representing a user in runtime

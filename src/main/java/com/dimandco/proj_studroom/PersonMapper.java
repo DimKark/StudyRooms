@@ -1,5 +1,7 @@
 package com.dimandco.proj_studroom;
 
+import com.dimandco.proj_studroom.core.model.Person;
+import com.dimandco.proj_studroom.core.service.model.PersonView;
 import org.springframework.stereotype.Component;
 
 /**

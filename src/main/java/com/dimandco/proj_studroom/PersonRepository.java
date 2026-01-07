@@ -1,5 +1,7 @@
 package com.dimandco.proj_studroom;
 
+import com.dimandco.proj_studroom.core.model.Person;
+import com.dimandco.proj_studroom.core.model.PersonType;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import java.util.*;

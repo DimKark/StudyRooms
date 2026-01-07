@@ -1,12 +1,10 @@
 package com.dimandco.proj_studroom.core.security;
 
-import com.dimandco.proj_studroom.Person;
+import com.dimandco.proj_studroom.core.model.Person;
 import com.dimandco.proj_studroom.PersonRepository;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-
-import java.util.Optional;
 
 /**
  * Implementation of Spring's {@link UserDetailsService} for providing application users

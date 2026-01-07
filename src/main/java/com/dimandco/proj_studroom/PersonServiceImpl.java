@@ -1,14 +1,21 @@
 package com.dimandco.proj_studroom;
 
-import com.dimandco.proj_studroom.port.LookupPort;
-import com.dimandco.proj_studroom.port.SmsNotificationPort;
+import com.dimandco.proj_studroom.core.model.Person;
+import com.dimandco.proj_studroom.core.model.PersonType;
+import com.dimandco.proj_studroom.core.port.LookupPort;
+import com.dimandco.proj_studroom.core.port.SmsNotificationPort;
+import com.dimandco.proj_studroom.core.service.model.CreatePersonRequest;
+import com.dimandco.proj_studroom.core.service.model.CreatePersonResult;
+import com.dimandco.proj_studroom.core.service.model.PersonView;
+import jakarta.validation.ConstraintViolation;
+import jakarta.validation.Validator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.time.Instant;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Implementation of {@link PersonService}
@@ -19,23 +26,27 @@ public class PersonServiceImpl implements PersonService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(PersonServiceImpl.class);
 
+    private final Validator validator;
     private final PasswordEncoder passwordEncoder;
     private final LookupPort lookupPort;
     private final SmsNotificationPort smsNotificationPort;
     private final PersonRepository personRepository;
     private final PersonMapper personMapper;
 
-    public PersonServiceImpl(final PasswordEncoder passwordEncoder,
+    public PersonServiceImpl(final Validator validator,
+                             final PasswordEncoder passwordEncoder,
                              final LookupPort lookupPort,
                              final SmsNotificationPort smsNotificationPort,
                              final PersonRepository personRepository,
                              final PersonMapper personMapper) {
+        if (validator == null) throw new NullPointerException();
         if (passwordEncoder == null) throw new NullPointerException();
         if (lookupPort == null) throw new IllegalArgumentException();
         if (smsNotificationPort == null) throw new IllegalArgumentException();
         if (personRepository == null) throw new NullPointerException();
         if (personMapper == null) throw new NullPointerException();
 
+        this.validator = validator;
         this.passwordEncoder = passwordEncoder;
         this.lookupPort = lookupPort;
         this.smsNotificationPort = smsNotificationPort;
@@ -47,16 +58,34 @@ public class PersonServiceImpl implements PersonService {
         return List.of(); // TODO Implement
     }
 
-    /**
     @Override
     public CreatePersonResult createPerson(CreatePersonRequest createPersonRequest, boolean notify) {
         return null;
     }
-     */
 
     @Override
     public CreatePersonResult createPerson(final CreatePersonRequest createPersonRequest) {
         if(createPersonRequest == null) throw new NullPointerException();
+
+        // CreatePersonRequest Validation
+        // ------------------------------------------
+
+        final Set<ConstraintViolation<CreatePersonRequest>> requestViolations =
+                this.validator.validate(createPersonRequest);
+        if (!requestViolations.isEmpty()) {
+            final StringBuilder sb = new StringBuilder();
+            for (ConstraintViolation<CreatePersonRequest> violation : requestViolations) {
+                sb
+                        .append(violation.getPropertyPath())
+                        .append(": ")
+                        .append(violation.getMessage())
+                        .append("\n");
+            }
+            return CreatePersonResult.fail(sb.toString());
+        }
+
+
+        // ------------------------------------------
 
         // TODO Validate createPersonRequest
 
@@ -109,9 +138,22 @@ public class PersonServiceImpl implements PersonService {
         person.setMobilePhoneNumber(mobilePhoneNumber);
         person.setPasswordHash(hashedPassword);
 
+        // -------------------------------------------
+
+        final Set<ConstraintViolation<Person>> personViolations = this.validator.validate(person);
+        if (!personViolations.isEmpty()) {
+            // Throw an exception instead of returning an instance, i.e. 'CreatePersonResult.fail'.
+            // At this point, errors/violations on the 'Person' instance
+            // indicate a programmers error, not a client error.
+            throw new RuntimeException("Invalid person instance");
+        }
+
+        // Persist Person (save/insert to database)
+        // -------------------------------------------
+
         person = this.personRepository.save(person);
 
-        // ----------------------------
+        // -------------------------------------------
 
         final String content = String.format("You have successfully registered for Study Rooms application. " +
                 "Use your email (%s) to login.", emailAddress);

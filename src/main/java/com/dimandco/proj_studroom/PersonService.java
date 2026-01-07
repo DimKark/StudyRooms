@@ -1,5 +1,9 @@
 package com.dimandco.proj_studroom;
 
+import com.dimandco.proj_studroom.core.service.model.CreatePersonRequest;
+import com.dimandco.proj_studroom.core.service.model.CreatePersonResult;
+import com.dimandco.proj_studroom.core.service.model.PersonView;
+
 import java.util.List;
 
 /**

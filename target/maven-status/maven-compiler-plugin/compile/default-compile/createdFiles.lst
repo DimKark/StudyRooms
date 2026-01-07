@@ -1,11 +1,1 @@
-com/dimandco/proj_studroom/web/ui/AuthController.class
-com/dimandco/proj_studroom/core/security/CurrentUserProvider.class
-com/dimandco/proj_studroom/web/ui/AuthUtils.class
-com/dimandco/proj_studroom/web/ui/AuthenticatedControllersAdvice.class
-com/dimandco/proj_studroom/core/security/AppicationUserDetailsService.class
-com/dimandco/proj_studroom/web/ui/HomepageController.class
-com/dimandco/proj_studroom/core/security/CurrentUser.class
-com/dimandco/proj_studroom/web/ui/ProfileController.class
-com/dimandco/proj_studroom/config/SecurityConfig.class
-com/dimandco/proj_studroom/core/security/ApplicationUserDetails.class
-com/dimandco/proj_studroom/UserLookupResult.class
+com\dimandco\proj_studroom\InitializeService.class
