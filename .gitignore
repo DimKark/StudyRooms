@@ -4,6 +4,9 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 
+### H2 Database ###
+LOCAL_DATA/h2/**
+
 ### STS ###
 .apt_generated
 .classpath
