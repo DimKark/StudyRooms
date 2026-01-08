@@ -1,5 +1,6 @@
-package com.dimandco.proj_studroom;
+package com.dimandco.proj_studroom.core.web;
 
+import com.dimandco.proj_studroom.PersonRepository;
 import com.dimandco.proj_studroom.core.model.Person;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;

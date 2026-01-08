@@ -5,9 +5,11 @@ import com.dimandco.proj_studroom.core.model.Person;
 import com.dimandco.proj_studroom.core.model.PersonType;
 import com.dimandco.proj_studroom.core.service.model.CreatePersonRequest;
 import com.dimandco.proj_studroom.core.service.model.CreatePersonResult;
+import jakarta.validation.Valid;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -39,13 +41,17 @@ public class RegistrationController {
     @PostMapping("/register")
     public String handleFormSubmission(
             final Authentication authentication,
-            @ModelAttribute("createPersonRequest") CreatePersonRequest createPersonRequest,
-            final Model model) {
+            @Valid @ModelAttribute("createPersonRequest") CreatePersonRequest createPersonRequest,
+            final BindingResult bindingResult, // Important! BindingResult **MUST** come in after the @Valid argument
+            final Model model
+    ) {
         if (AuthUtils.isAuthenticated(authentication)){
             return "redirect:/profile";
         }
-        // TODO if form has errors, show form + errors
-        // TODO if form is okay, store person, redirect.
+        if (bindingResult.hasErrors()){
+            return "register";
+        }
+
         /**
         final String emailAddress = person.getEmailAddress();
         final String mobilePhoneNumber = person.getMobilePhoneNumber();
