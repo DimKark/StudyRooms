@@ -5,9 +5,9 @@ import com.dimandco.proj_studroom.core.model.PersonType;
 import java.util.Optional;
 
 /**
- * Port to external service for managing lookups.
+ * Port to external service for managing Hua ID validations.
  */
-public interface LookupPort {
+public interface HuaIdValidationPort {
 
-    Optional<PersonType> lookup(final String huaId);
+    boolean validate(final String huaId);
 }

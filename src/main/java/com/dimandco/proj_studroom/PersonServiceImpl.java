@@ -2,7 +2,7 @@ package com.dimandco.proj_studroom;
 
 import com.dimandco.proj_studroom.core.model.Person;
 import com.dimandco.proj_studroom.core.model.PersonType;
-import com.dimandco.proj_studroom.core.port.LookupPort;
+import com.dimandco.proj_studroom.core.port.HuaIdValidationPort;
 import com.dimandco.proj_studroom.core.service.model.CreatePersonRequest;
 import com.dimandco.proj_studroom.core.service.model.CreatePersonResult;
 import com.dimandco.proj_studroom.core.service.model.PersonView;
@@ -26,24 +26,24 @@ public class PersonServiceImpl implements PersonService {
 
     private final Validator validator;
     private final PasswordEncoder passwordEncoder;
-    private final LookupPort lookupPort;
+    private final HuaIdValidationPort huaIdValidationPort;
     private final PersonRepository personRepository;
     private final PersonMapper personMapper;
 
     public PersonServiceImpl(final Validator validator,
                              final PasswordEncoder passwordEncoder,
-                             final LookupPort lookupPort,
+                             final HuaIdValidationPort huaIdValidationPort,
                              final PersonRepository personRepository,
                              final PersonMapper personMapper) {
         if (validator == null) throw new NullPointerException();
         if (passwordEncoder == null) throw new NullPointerException();
-        if (lookupPort == null) throw new IllegalArgumentException();
+        if (huaIdValidationPort == null) throw new IllegalArgumentException();
         if (personRepository == null) throw new NullPointerException();
         if (personMapper == null) throw new NullPointerException();
 
         this.validator = validator;
         this.passwordEncoder = passwordEncoder;
-        this.lookupPort = lookupPort;
+        this.huaIdValidationPort = huaIdValidationPort;
         this.personRepository = personRepository;
         this.personMapper = personMapper;
     }
@@ -110,14 +110,9 @@ public class PersonServiceImpl implements PersonService {
 
         // -------------------------------------------
 
-        // Use external service to validate Hua ID and role
-        final PersonType personType$Lookup = this.lookupPort.lookup(huaId).orElse(null);
-        if (personType$Lookup == null) {
-            return CreatePersonResult.fail("Invalid HUA ID");
-        }
-        if (personType$Lookup != type) {
-            return CreatePersonResult.fail("The provided person type does not match the actual one");
-        }
+        // Use external service to validate Hua ID
+        final boolean validHuaId = this.huaIdValidationPort.validate(huaId);
+        if (!validHuaId) return CreatePersonResult.fail("Invalid HUA ID");
 
         // -------------------------------------------
 
