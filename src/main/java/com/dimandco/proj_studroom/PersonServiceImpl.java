@@ -3,7 +3,6 @@ package com.dimandco.proj_studroom;
 import com.dimandco.proj_studroom.core.model.Person;
 import com.dimandco.proj_studroom.core.model.PersonType;
 import com.dimandco.proj_studroom.core.port.LookupPort;
-import com.dimandco.proj_studroom.core.port.SmsNotificationPort;
 import com.dimandco.proj_studroom.core.service.model.CreatePersonRequest;
 import com.dimandco.proj_studroom.core.service.model.CreatePersonResult;
 import com.dimandco.proj_studroom.core.service.model.PersonView;
@@ -19,7 +18,6 @@ import java.util.Set;
 
 /**
  * Implementation of {@link PersonService}
- * commented out some things for when we are ready to implement sms notification
  */
 @Service
 public class PersonServiceImpl implements PersonService {
@@ -29,27 +27,23 @@ public class PersonServiceImpl implements PersonService {
     private final Validator validator;
     private final PasswordEncoder passwordEncoder;
     private final LookupPort lookupPort;
-    private final SmsNotificationPort smsNotificationPort;
     private final PersonRepository personRepository;
     private final PersonMapper personMapper;
 
     public PersonServiceImpl(final Validator validator,
                              final PasswordEncoder passwordEncoder,
                              final LookupPort lookupPort,
-                             final SmsNotificationPort smsNotificationPort,
                              final PersonRepository personRepository,
                              final PersonMapper personMapper) {
         if (validator == null) throw new NullPointerException();
         if (passwordEncoder == null) throw new NullPointerException();
         if (lookupPort == null) throw new IllegalArgumentException();
-        if (smsNotificationPort == null) throw new IllegalArgumentException();
         if (personRepository == null) throw new NullPointerException();
         if (personMapper == null) throw new NullPointerException();
 
         this.validator = validator;
         this.passwordEncoder = passwordEncoder;
         this.lookupPort = lookupPort;
-        this.smsNotificationPort = smsNotificationPort;
         this.personRepository = personRepository;
         this.personMapper = personMapper;
     }
@@ -103,7 +97,7 @@ public class PersonServiceImpl implements PersonService {
             return CreatePersonResult.fail("Email must end in '@hua.gr'");
 
         if (this.personRepository.existsByHuaIdIgnoreCase(huaId)) {
-            return CreatePersonResult.fail("Hua Id must be unique");
+            return CreatePersonResult.fail("Hua ID is already registered");
         }
 
         if (this.personRepository.existsByEmailAddressIgnoreCase(emailAddress)) {
@@ -154,13 +148,6 @@ public class PersonServiceImpl implements PersonService {
         person = this.personRepository.save(person);
 
         // -------------------------------------------
-
-        final String content = String.format("You have successfully registered for Study Rooms application. " +
-                "Use your email (%s) to login.", emailAddress);
-        final boolean sent = this.smsNotificationPort.sendSms(mobilePhoneNumber, content);
-        if (!sent) {
-            LOGGER.warn("SMS sent to {} failed", mobilePhoneNumber);
-        }
 
         final PersonView personView = this.personMapper.convertPersonToPersonView(person);
 
