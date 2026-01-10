@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{base}">
+
+<head>
+    <title>404 Not Found</title>
+</head>
+
+<body>
+<header layout:fragment="header">
+    <h1>404 Not Found</h1>
+</header>
+
+<section layout:fragment="main">
+    <p th:if="${path}" th:text="${'Path: ' + (path == null ? '' : path)}"></p>
+    <p th:if="${message}" th:text="${message}"></p>
+    <p><a th:href="@{/}">Homepage</a></p>
+</section>

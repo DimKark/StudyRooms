@@ -25,6 +25,7 @@
 /home/dimk/lab/sem5/studyrooms/StudyRooms/src/main/java/com/dimandco/proj_studroom/core/web/ui/AuthController.java
 /home/dimk/lab/sem5/studyrooms/StudyRooms/src/main/java/com/dimandco/proj_studroom/core/web/ui/AuthUtils.java
 /home/dimk/lab/sem5/studyrooms/StudyRooms/src/main/java/com/dimandco/proj_studroom/core/web/ui/AuthenticatedControllersAdvice.java
+/home/dimk/lab/sem5/studyrooms/StudyRooms/src/main/java/com/dimandco/proj_studroom/core/web/ui/GlobalErrorHandlerControllerAdvice.java
 /home/dimk/lab/sem5/studyrooms/StudyRooms/src/main/java/com/dimandco/proj_studroom/core/web/ui/HomepageController.java
 /home/dimk/lab/sem5/studyrooms/StudyRooms/src/main/java/com/dimandco/proj_studroom/core/web/ui/ProfileController.java
 /home/dimk/lab/sem5/studyrooms/StudyRooms/src/main/java/com/dimandco/proj_studroom/core/web/ui/RegistrationController.java

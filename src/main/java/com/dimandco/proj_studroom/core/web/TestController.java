@@ -1,36 +1,31 @@
 package com.dimandco.proj_studroom.core.web;
 
 import com.dimandco.proj_studroom.PersonRepository;
-import com.dimandco.proj_studroom.core.model.Person;
-import org.springframework.http.MediaType;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-import java.time.Instant;
 
 /**
- * Used for testing
+ * Controller for <strong>testing</strong>
  */
-@RestController
+@Controller
 public class TestController {
-    private final PersonRepository personRepository;
-
-    public TestController(PersonRepository personRepository) {
-        this.personRepository = personRepository;
+    /*
+    @GetMapping(value = "/test/error/404")
+    public String test() {
+        return "error/404";
     }
 
-    @GetMapping(value = "/test", produces = MediaType.TEXT_PLAIN_VALUE)
-    public String test() {
-        Person person = new Person();
-        person.setId(null); // auto-generated
-        person.setEmailAddress("example@hua.gr");
-        person.setFirstName("ExampleFirstName");
-        person.setLastName("ExampleLastName");
-        person.setMobilePhoneNumber("+306900000000");
-        person.setCreatedAt(Instant.now());
+    @GetMapping(value = "test/error/error")
+    public String testErrorError() {
+        return "error/error";
+    }
+    */
 
-        person = this.personRepository.save(person);
-
-        return person.toString();
+    @GetMapping(value = "test/error/NullPointerException")
+    public String testErrorNullPointerException() {
+        final Integer a = null;
+        final int b = 0;
+        final int c = a + b; // Throws NullPointerException
+        return null; // Unreachable
     }
 }

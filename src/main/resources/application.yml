@@ -18,3 +18,10 @@ spring:
 
 server:
   port: 8080
+
+  error:
+    whitelabel:
+      enabled: false
+    include-message: always
+    include-binding-errors: always
+    include-exception: true

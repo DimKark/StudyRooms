@@ -2,6 +2,7 @@ com/dimandco/proj_studroom/core/port/impl/dto/HuaIdValidationResult.class
 com/dimandco/proj_studroom/core/web/ui/AuthUtils.class
 com/dimandco/proj_studroom/core/model/PersonType.class
 com/dimandco/proj_studroom/core/model/Person.class
+com/dimandco/proj_studroom/core/web/ui/GlobalErrorHandlerControllerAdvice.class
 com/dimandco/proj_studroom/core/web/ui/RegistrationController.class
 com/dimandco/proj_studroom/core/port/impl/package-info.class
 com/dimandco/proj_studroom/core/security/CurrentUserProvider.class
