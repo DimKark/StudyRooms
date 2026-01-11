@@ -14,7 +14,6 @@
 /home/dimk/lab/sem5/studyrooms/StudyRooms/src/main/java/com/dimandco/proj_studroom/core/port/impl/HuaIdValidationPortImpl.java
 /home/dimk/lab/sem5/studyrooms/StudyRooms/src/main/java/com/dimandco/proj_studroom/core/port/impl/dto/HuaIdValidationResult.java
 /home/dimk/lab/sem5/studyrooms/StudyRooms/src/main/java/com/dimandco/proj_studroom/core/port/impl/package-info.java
-/home/dimk/lab/sem5/studyrooms/StudyRooms/src/main/java/com/dimandco/proj_studroom/core/security/AppicationUserDetailsService.java
 /home/dimk/lab/sem5/studyrooms/StudyRooms/src/main/java/com/dimandco/proj_studroom/core/security/ApplicationUserDetails.java
 /home/dimk/lab/sem5/studyrooms/StudyRooms/src/main/java/com/dimandco/proj_studroom/core/security/ApplicationUserDetailsService.java
 /home/dimk/lab/sem5/studyrooms/StudyRooms/src/main/java/com/dimandco/proj_studroom/core/security/CurrentUser.java
