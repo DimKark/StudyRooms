@@ -15,17 +15,11 @@
 
 <section layout:fragment="main">
 
-  <p>IN DEVELOPMENT</p>
-
   <div>
-    <ul>
-      <li>Email <span>???</span></li>
-      <li>Role <span>???</span></li>
-    </ul>
-    <ul>
-      <li>Email <span th:text="${me.emailAddress()}">???</span></li>
-      <li>Role <span th:text="${me.type()}">???</span></li>
-    </ul>
+    <div>
+      <a th:href="@{/profile}" th:text="'Logged in as: ' + ${me.emailAddress()} + ' (' + ${me.type()} + ')'"></a>
+    </div>
+
     <hr>
 
     <ul>

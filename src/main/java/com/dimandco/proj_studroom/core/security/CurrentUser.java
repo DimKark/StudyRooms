@@ -5,4 +5,4 @@ import com.dimandco.proj_studroom.core.model.PersonType;
 /**
  * @see CurrentUserProvider
  */
-public record CurrentUser (long id , String emailAddress, PersonType personType) {}
+public record CurrentUser (long id , String emailAddress, PersonType type) {}
