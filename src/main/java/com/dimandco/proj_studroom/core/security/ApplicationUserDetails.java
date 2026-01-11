@@ -11,7 +11,6 @@ import java.util.Collections;
 /**
  * Immutable view implementing Spring's {@link UserDetails} for representing a user in runtime
  */
-@SuppressWarnings("RedundantMethodOverride")
 public final class ApplicationUserDetails implements UserDetails {
 
     private final long personId;

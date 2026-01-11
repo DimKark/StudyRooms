@@ -91,7 +91,8 @@
 			<artifactId>spring-security-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-		<!-- REST-API Client Specific
+
+		<!-- REST-API Client Specific -->
 		<dependency>
             <groupId>org.springdoc</groupId>
             <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
@@ -113,7 +114,9 @@
             <artifactId>jjwt-jackson</artifactId>
             <version>0.13.0</version>
             <scope>runtime</scope>
-        </dependency> -->
+        </dependency>
+		<!-- End of REST API dependencies -->
+
 	</dependencies>
 
 	<build>

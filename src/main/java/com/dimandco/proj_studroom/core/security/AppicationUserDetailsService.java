@@ -5,10 +5,12 @@ import com.dimandco.proj_studroom.PersonRepository;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
 
 /**
  * Implementation of Spring's {@link UserDetailsService} for providing application users
  */
+@Service
 public final class AppicationUserDetailsService implements UserDetailsService {
     private final PersonRepository personRepository;
 

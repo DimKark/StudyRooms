@@ -1,4 +1,5 @@
 com/dimandco/proj_studroom/core/port/impl/dto/HuaIdValidationResult.class
+com/dimandco/proj_studroom/core/model/Ticket.class
 com/dimandco/proj_studroom/core/web/ui/AuthUtils.class
 com/dimandco/proj_studroom/core/model/PersonType.class
 com/dimandco/proj_studroom/core/model/Person.class
@@ -6,6 +7,7 @@ com/dimandco/proj_studroom/core/web/ui/GlobalErrorHandlerControllerAdvice.class
 com/dimandco/proj_studroom/core/web/ui/RegistrationController.class
 com/dimandco/proj_studroom/core/port/impl/package-info.class
 com/dimandco/proj_studroom/core/security/CurrentUserProvider.class
+com/dimandco/proj_studroom/core/model/TicketStatus.class
 com/dimandco/proj_studroom/core/port/HuaIdValidationPort.class
 com/dimandco/proj_studroom/core/web/TestController.class
 com/dimandco/proj_studroom/core/web/ui/HomepageController.class

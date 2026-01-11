@@ -17,10 +17,13 @@
 
     <form th:action="@{/login}" method="post">
         <!-- Message -->
+        <div class="text-center mb-3" th:if="${message}">
+            <p class="text-primary" th:text="${message}"></p>
+        </div>
 
         <!-- Error Message -->
-        <div class="text-center mb-3" th:if="${message}">
-            <p class="text-danger" th:text="${message}"></p>
+        <div class="text-center mb-3" th:if="${error}">
+            <p class="text-danger" th:text="${error}"></p>
         </div>
 
         <!-- Form Controls -->
