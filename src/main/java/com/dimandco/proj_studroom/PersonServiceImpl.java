@@ -48,8 +48,14 @@ public class PersonServiceImpl implements PersonService {
         this.personMapper = personMapper;
     }
 
+    @Override
     public List<PersonView> getPeople() {
-        return List.of(); // TODO Implement
+        final List<Person> personList = this.personRepository.findAll();
+        final List<PersonView> personViewList = personList
+                .stream()
+                .map(this.personMapper::convertPersonToPersonView)
+                .toList();
+        return personViewList;
     }
 
     @Override
