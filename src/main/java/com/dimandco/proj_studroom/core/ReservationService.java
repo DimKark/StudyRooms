@@ -52,5 +52,19 @@ public class ReservationService {
         System.out.println("No active reservation was found");
         return false;
     }
+
+    public List<RoomReservation> getReservationHistory() {
+        return reservations;
+    }
+
+    public List<RoomReservation> getReservationsHistoryByStudent(Person student) {
+        List<RoomReservation> history = new ArrayList<>();
+        for (RoomReservation r : reservations) {
+            if (r.getStudent().equals(student)) {
+                history.add(r);
+            }
+        }
+        return history;
+    }
 }
 
