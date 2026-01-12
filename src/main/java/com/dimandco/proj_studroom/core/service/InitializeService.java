@@ -1,6 +1,5 @@
 package com.dimandco.proj_studroom.core.service;
 
-import com.dimandco.proj_studroom.PersonService;
 import com.dimandco.proj_studroom.core.model.PersonType;
 import com.dimandco.proj_studroom.core.service.model.CreatePersonRequest;
 import jakarta.annotation.PostConstruct;

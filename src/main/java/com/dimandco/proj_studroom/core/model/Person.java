@@ -12,12 +12,11 @@ import java.time.Instant;
 /**
  * Person entity.
  */
-
 @Entity
 @Table(name = "person", uniqueConstraints = {}, indexes = {
         @Index(name = "idx_person_type", columnList = "type")
 })
-public class Person {
+public final class Person {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id; // Increments automatically
@@ -83,7 +82,7 @@ public class Person {
     public Person(String huaId, String firstName, String lastName, String emailAddress,
                   String mobilePhoneNumber, String passwordhash, PersonType type) {
         this.id = null;
-        huaId = huaId;
+        this.huaId = huaId;
         this.firstName = firstName;
         this.lastName = lastName;
         this.emailAddress = emailAddress;

@@ -1,4 +1,4 @@
-package com.dimandco.proj_studroom;
+package com.dimandco.proj_studroom.core.service.mapper;
 
 import com.dimandco.proj_studroom.core.model.Person;
 import com.dimandco.proj_studroom.core.service.model.PersonView;

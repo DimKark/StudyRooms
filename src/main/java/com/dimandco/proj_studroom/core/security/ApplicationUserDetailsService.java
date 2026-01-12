@@ -1,7 +1,7 @@
 package com.dimandco.proj_studroom.core.security;
 
 import com.dimandco.proj_studroom.core.model.Person;
-import com.dimandco.proj_studroom.PersonRepository;
+import com.dimandco.proj_studroom.core.repository.PersonRepository;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

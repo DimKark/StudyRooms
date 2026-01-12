@@ -1,5 +1,7 @@
 package com.dimandco.proj_studroom.core;
 
+import com.dimandco.proj_studroom.core.model.StudyRoom;
+
 import java.time.LocalTime;
 
 public class ReservationLogic {

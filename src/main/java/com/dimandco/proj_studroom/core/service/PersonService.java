@@ -1,4 +1,4 @@
-package com.dimandco.proj_studroom;
+package com.dimandco.proj_studroom.core.service;
 
 import com.dimandco.proj_studroom.core.service.model.CreatePersonRequest;
 import com.dimandco.proj_studroom.core.service.model.CreatePersonResult;

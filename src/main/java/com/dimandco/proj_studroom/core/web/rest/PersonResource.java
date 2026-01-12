@@ -1,11 +1,8 @@
 package com.dimandco.proj_studroom.core.web.rest;
 
+import com.dimandco.proj_studroom.core.service.PersonService;
 import com.fasterxml.jackson.databind.ObjectMapper;
-
-import com.dimandco.proj_studroom.PersonService;
 import com.dimandco.proj_studroom.core.service.model.PersonView;
-
-import org.springframework.context.annotation.Bean;
 import org.springframework.http.MediaType;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
