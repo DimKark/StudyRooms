@@ -38,5 +38,19 @@ public class ReservationService {
         System.out.println("Reservation confirmed");
         return true;
     }
+
+    public boolean  deleteReservation(
+            long reservationId
+    ) {
+        for (RoomReservation r : reservations) {
+            if (r.getStudent().equals(reservationId) && r.isActive()) {
+                r.cancelReservation();
+                System.out.println("Reservation canceled");
+                return true;
+            }
+        }
+        System.out.println("No active reservation was found");
+        return false;
+    }
 }
 

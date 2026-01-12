@@ -30,6 +30,13 @@ public class RoomReservation {
     public boolean isActive() {
         return active;
     }
+
+    public void cancelReservation() {
+        this.active= false;
+    }
+    public Person getStudent() {
+        return student;
+    }
 }
 
 
