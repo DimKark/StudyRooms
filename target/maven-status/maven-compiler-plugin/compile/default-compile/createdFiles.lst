@@ -23,6 +23,7 @@ com/dimandco/proj_studroom/core/port/impl/dto/HuaIdValidationResult.class
 com/dimandco/proj_studroom/core/repository/ReservationRepository.class
 com/dimandco/proj_studroom/core/service/impl/PersonServiceImpl.class
 com/dimandco/proj_studroom/core/model/RoomReservation.class
+com/dimandco/proj_studroom/core/model/ReservationLog.class
 com/dimandco/proj_studroom/core/model/Ticket.class
 com/dimandco/proj_studroom/core/security/ApplicationUserDetailsService.class
 com/dimandco/proj_studroom/core/web/ui/AuthUtils.class

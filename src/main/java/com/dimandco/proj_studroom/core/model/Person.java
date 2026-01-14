@@ -92,34 +92,33 @@ public final class Person {
         this.type = type;
     }
 
+    // -------------------- GETTERS AND SETTERS --------------------
+
     public Long getId() {
         return id;
     }
-
     public void setId(Long id) {
         this.id = id;
     }
 
     public String getHuaId() { return huaId; }
-
     public void setHuaId(String huaId) { this.huaId = huaId; }
 
     public String getFirstName() {
         return firstName;
     }
-
     public void setFirstName(String firstName) { this.firstName = firstName; }
 
     public String getLastName() {
         return lastName;
     }
-
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
 
-    public String getEmailAddress() { return emailAddress; }
+    public String getFullName() { return firstName + " " + lastName; }
 
+    public String getEmailAddress() { return emailAddress; }
     public void setEmailAddress(String emailAddress) {
         this.emailAddress = emailAddress;
     }
@@ -127,19 +126,16 @@ public final class Person {
     public String getMobilePhoneNumber() {
         return mobilePhoneNumber;
     }
-
     public void setMobilePhoneNumber(String mobilePhoneNumber) {
         this.mobilePhoneNumber = mobilePhoneNumber;
     }
 
     public String getPasswordHash() { return passwordHash; }
-
     public void setPasswordHash(String passwordHash) { this.passwordHash = passwordHash; }
 
     public Instant getCreatedAt() {
         return createdAt;
     }
-
     public void setCreatedAt(Instant createdAt) {
         this.createdAt = createdAt;
     }
@@ -147,10 +143,11 @@ public final class Person {
     public PersonType getType() {
         return type;
     }
-
     public void setType(PersonType type) {
         this.type = type;
     }
+
+    // -------------------------------------------------------------
 
     @Override
     public String toString() {

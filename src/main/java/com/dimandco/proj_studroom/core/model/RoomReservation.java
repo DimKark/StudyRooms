@@ -16,27 +16,27 @@ public final class RoomReservation {
     private Long id; // Increments automatically
 
     @ManyToOne
-    @JoinColumn//(name = "room")
+    @JoinColumn
     private StudyRoom room;
 
     @ManyToOne
-    @JoinColumn//(name = "student")
+    @JoinColumn
     private Person student;
 
     @NotNull
-    @Column(/*name = "date", */nullable = false)
+    @Column(nullable = false)
     private LocalDate date;
 
     @NotNull
-    @Column(/*name = "from", */nullable = false)
+    @Column(nullable = false)
     private LocalTime fromTime;
 
     @NotNull
-    @Column(/*name = "to", */nullable = false)
+    @Column(nullable = false)
     private LocalTime toTime;
 
     @NotNull
-    @Column(/*name = "active", */nullable = false)
+    @Column(nullable = false)
     private boolean active;
 
     public RoomReservation() {
@@ -66,9 +66,7 @@ public final class RoomReservation {
         this.active = active;
     }
 
-    public boolean overlaps(LocalTime from, LocalTime to) {
-        return from.isBefore(this.toTime) && to.isAfter(this.fromTime);
-    }
+   // -------------------- GETTERS AND SETTERS --------------------
 
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
@@ -90,6 +88,24 @@ public final class RoomReservation {
 
     public boolean getActive() { return active; }
     public void setActive(boolean active) { this.active = active; }
+
+    // -------------------------------------------------------------
+
+    public boolean overlaps(LocalTime from, LocalTime to) {
+        return from.isBefore(this.toTime) && to.isAfter(this.fromTime);
+    }
+
+    @Override
+    public String toString() {
+        String s =
+                "Room: " + this.room.getName() +"\n" +
+                "Student: " + this.student.getFullName() +"\n" +
+                "Date: " + this.date.toString() +"\n" +
+                "Booked from " + this.fromTime + " to " + this.toTime + "\n" +
+                "Active: " + this.active;
+
+        return s;
+    }
 }
 
 

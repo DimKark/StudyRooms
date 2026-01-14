@@ -44,6 +44,8 @@ public final class StudyRoom {
         this.active = true;
     }
 
+    // -------------------- GETTERS AND SETTERS --------------------
+
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 
@@ -61,6 +63,8 @@ public final class StudyRoom {
 
     public boolean getActive() { return active; }
     public void setActive(boolean active) { this.active = active; }
+
+    // -------------------------------------------------------------
 
     /** Checks if given time frame is within the room's opening times */
     public boolean isWithinOpeningTime(LocalTime from, LocalTime to) {

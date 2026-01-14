@@ -1,5 +1,6 @@
 package com.dimandco.proj_studroom.core.service.impl;
 
+import com.dimandco.proj_studroom.core.model.ReservationLog;
 import com.dimandco.proj_studroom.core.repository.ReservationRepository;
 import com.dimandco.proj_studroom.core.model.RoomReservation;
 import com.dimandco.proj_studroom.core.service.ReservationService;
@@ -9,8 +10,12 @@ import com.dimandco.proj_studroom.core.service.model.CreateReservationResult;
 import com.dimandco.proj_studroom.core.service.model.ReservationView;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class ReservationServiceImpl implements ReservationService {
+    private static List<ReservationLog> reservationHistory;
 
     private final ReservationMapper reservationMapper;
     private final ReservationRepository reservationRepository;
@@ -19,6 +24,8 @@ public class ReservationServiceImpl implements ReservationService {
         if(reservationMapper == null) throw new NullPointerException("reservationMapper is null");
         this.reservationMapper = reservationMapper;
         this.reservationRepository = reservationRepository;
+
+        this.reservationHistory = new ArrayList<>();
     }
 
     @Override
@@ -46,11 +53,13 @@ public class ReservationServiceImpl implements ReservationService {
 
         // --------------------------------------------------------------
 
-        // TODO UNCOMMENT
         reservation = reservationRepository.save(reservation);
 
         final ReservationView reservationView =
                 this.reservationMapper.convertReservationToReservationView(reservation);
+
+        // Save reservation to history
+        reservationHistory.add(new ReservationLog(reservation));
 
         return CreateReservationResult.success(reservationView);
     }
@@ -63,6 +72,14 @@ public class ReservationServiceImpl implements ReservationService {
         else return false;
     }
 
-    // TODO RESERVATION HISTORY
+    /** Print reservation history for debug purposes */
+    public static String getReservationHistory() {
+        StringBuilder s = new StringBuilder();
+        for(ReservationLog rl : reservationHistory) {
+            s.append(rl.toString() + "\n");
+        }
+
+        return s.toString();
+    }
 }
 

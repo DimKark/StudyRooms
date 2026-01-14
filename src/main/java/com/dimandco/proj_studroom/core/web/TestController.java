@@ -10,9 +10,11 @@ import com.dimandco.proj_studroom.core.repository.StudyRoomRepository;
 import com.dimandco.proj_studroom.core.service.PersonService;
 import com.dimandco.proj_studroom.core.service.ReservationService;
 import com.dimandco.proj_studroom.core.service.StudyRoomService;
+import com.dimandco.proj_studroom.core.service.impl.ReservationServiceImpl;
 import com.dimandco.proj_studroom.core.service.model.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.TransactionSystemException;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import java.time.LocalDate;
@@ -61,7 +63,9 @@ public class TestController {
     }
 
     @GetMapping("test/db")
-    public String testDb() {
+    public String testDb(Model m) {
+        if(m == null) throw new NullPointerException();
+
         CreateStudyRoomRequest csrr = new CreateStudyRoomRequest(
                 "testRoom",
                 10,
@@ -73,6 +77,7 @@ public class TestController {
         StudyRoom sr = new StudyRoom();
         if(csrres.created()) {
             sr = studyRoomRepository.findById(csrres.studyRoomView().id()).get();
+            m.addAttribute("studyRoom", sr);
         }
 
         System.out.println(sr.toString());
@@ -90,6 +95,7 @@ public class TestController {
         Person p = new Person();
         if(cpRes.created()) {
             p = personRepository.findById(cpRes.personView().id()).get();
+            m.addAttribute("person", p);
         }
 
         CreateReservationRequest crr = new CreateReservationRequest(
@@ -103,7 +109,10 @@ public class TestController {
         RoomReservation rr = new RoomReservation();
         if(crres.created()) {
             rr = reservationRepository.findById(crres.reservationView().id()).get();
+            m.addAttribute("reservation", rr);
         }
+
+        System.out.println(ReservationServiceImpl.getReservationHistory());
 
         return "test";
     }
