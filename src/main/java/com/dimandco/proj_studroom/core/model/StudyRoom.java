@@ -16,12 +16,10 @@ public final class StudyRoom {
     private Long id;
 
     @NotNull
-    @NotBlank
     @Column(unique = true, nullable = false)
     private String name;
 
     @NotNull
-    @NotBlank
     @Column(nullable = false)
     private int capacity;
 
@@ -36,6 +34,15 @@ public final class StudyRoom {
     @NotNull
     @Column
     private boolean active = true;
+
+    public StudyRoom() {
+        this.id = null;
+        this.name = "a";
+        this.capacity = 5;
+        this.openFrom = LocalTime.now();
+        this.openTo = LocalTime.now();
+        this.active = true;
+    }
 
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
@@ -58,6 +65,18 @@ public final class StudyRoom {
     /** Checks if given time frame is within the room's opening times */
     public boolean isWithinOpeningTime(LocalTime from, LocalTime to) {
         return !(from.isBefore(this.openFrom) || to.isAfter(this.openTo));
+    }
+
+    @Override
+    public String toString() {
+        String s =
+            "Name: " + this.name
+            + "\n Capacity: " + this.capacity
+            + "\n Open From: " + this.openFrom
+            + "\n Open To: " + this.openTo
+            + "\n Active: " + this.active;
+
+        return s;
     }
 }
 

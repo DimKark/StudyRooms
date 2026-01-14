@@ -12,6 +12,7 @@ import com.dimandco.proj_studroom.core.service.ReservationService;
 import com.dimandco.proj_studroom.core.service.StudyRoomService;
 import com.dimandco.proj_studroom.core.service.model.*;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.TransactionSystemException;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import java.time.LocalDate;
@@ -73,6 +74,8 @@ public class TestController {
         if(csrres.created()) {
             sr = studyRoomRepository.findById(csrres.studyRoomView().id()).get();
         }
+
+        System.out.println(sr.toString());
 
         CreatePersonRequest cpr = new CreatePersonRequest(
                 PersonType.STUDENT,

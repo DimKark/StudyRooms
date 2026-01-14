@@ -23,6 +23,8 @@ public class StudyRoomServiceImpl implements StudyRoomService {
 
     @Override
     public CreateStudyRoomResult createStudyRoom(CreateStudyRoomRequest csrr) {
+        if(csrr == null) throw new NullPointerException("csrr cannot be null");
+
         StudyRoom studyRoom = new StudyRoom();
 
         studyRoom.setName(csrr.name());
