@@ -62,7 +62,7 @@ public class TestController {
         return null; // Unreachable
     }
 
-    @GetMapping("test/db")
+    @GetMapping("test/reservation")
     public String testDb(Model m) {
         if(m == null) throw new NullPointerException();
 
@@ -73,14 +73,7 @@ public class TestController {
                 LocalTime.now(),
                 true
         );
-        CreateStudyRoomResult csrres = this.studyRoomService.createStudyRoom(csrr);
-        StudyRoom sr = new StudyRoom();
-        if(csrres.created()) {
-            sr = studyRoomRepository.findById(csrres.studyRoomView().id()).get();
-            m.addAttribute("studyRoom", sr);
-        }
-
-        System.out.println(sr.toString());
+        this.studyRoomService.createStudyRoom(csrr);
 
         CreatePersonRequest cpr = new CreatePersonRequest(
                 PersonType.STUDENT,
@@ -91,29 +84,8 @@ public class TestController {
                 "6945280161",
                 "1234"
         );
-        CreatePersonResult cpRes = this.personService.createPerson(cpr);
-        Person p = new Person();
-        if(cpRes.created()) {
-            p = personRepository.findById(cpRes.personView().id()).get();
-            m.addAttribute("person", p);
-        }
+        this.personService.createPerson(cpr);
 
-        CreateReservationRequest crr = new CreateReservationRequest(
-                sr,
-                p,
-                LocalDate.now(),
-                LocalTime.now(),
-                LocalTime.now()
-        );
-        CreateReservationResult crres = this.reservationService.createReservation(crr);
-        RoomReservation rr = new RoomReservation();
-        if(crres.created()) {
-            rr = reservationRepository.findById(crres.reservationView().id()).get();
-            m.addAttribute("reservation", rr);
-        }
-
-        System.out.println(ReservationServiceImpl.getReservationHistory());
-
-        return "test";
+        return "login";
     }
 }

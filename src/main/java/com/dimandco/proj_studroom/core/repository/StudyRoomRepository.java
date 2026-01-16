@@ -8,4 +8,5 @@ import java.util.Optional;
 @Repository
 public interface StudyRoomRepository extends JpaRepository<StudyRoom, Long> {
     Optional<StudyRoom> findById(final Long id);
+    Optional<StudyRoom> findByNameIgnoreCase(final String name);
 }

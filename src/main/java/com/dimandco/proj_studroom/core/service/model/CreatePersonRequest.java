@@ -18,4 +18,10 @@ public record CreatePersonRequest(
         @NotNull @NotBlank @Size(max = 100) @Email String emailAddress,
         @NotNull @NotBlank @Size(max = 18) String mobilePhoneNumber,
         @NotNull @NotBlank @Size(max = 100) @Size(min = 4, max = 24) String rawPassword
-) {}
+) {
+    public static CreatePersonRequest empty() {
+        return new CreatePersonRequest(PersonType.STUDENT,
+                "", "", "", "", "",
+                "");
+    }
+}

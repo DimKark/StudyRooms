@@ -10,9 +10,49 @@
 
 <body>
 <header layout:fragment="header">
-    <h1>Reservation</h1>
+    <h1>StudyRooms<small>Reservation</small></h1>
 </header>
 
 <section layout:fragment="main">
-    <h3>IN DEVELOPMENT</h3>
+
+    <form th:action="@{/reservation}" method="POST" th:object="${createReservationRequest}">
+        <!-- Error Message -->
+        <div class="text-center mb-3" th:if="${errorMessage != null}">
+            <p class="text-danger n-0 p-0" th:text="${errorMessage}"></p>
+        </div>
+
+        <!-- Success Message -->
+        <div class="text-center mb-3" th:if="${message != null}">
+            <p class="text-primary" th:text="${message}"></p>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Room Name: </label>
+            <input th:field="*{roomName}" class="form-control" required/>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Student HuaID: </label>
+            <input th:field="*{studentHuaId}" class="form-control" required/>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Reservation Date: </label>
+            <input type="date" th:field="*{date}" class="form-control" required/>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">From: </label>
+            <input type="time" th:field="*{from}" class="form-control" required/>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">To: </label>
+            <input type="time" th:field="*{to}" class="form-control" required/>
+        </div>
+
+        <div class="mb-6">
+            <button type="submit" class="btn btn-primary">Create Reservation</button>
+        </div>
+    </form>
 </section>

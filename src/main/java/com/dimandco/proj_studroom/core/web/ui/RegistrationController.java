@@ -30,10 +30,8 @@ public class RegistrationController {
         if (AuthUtils.isAuthenticated(authentication)){
             return "redirect:/profile";
         }
-        final Person person = new Person();
-        model.addAttribute("createPersonRequest", new CreatePersonRequest(PersonType.STUDENT,
-                "", "", "", "", "",
-                ""));
+
+        model.addAttribute("createPersonRequest", CreatePersonRequest.empty());
         return "register"; // This loads register.html
     }
 
@@ -52,31 +50,6 @@ public class RegistrationController {
             return "register";
         }
 
-        /**
-        final String emailAddress = person.getEmailAddress();
-        final String mobilePhoneNumber = person.getMobilePhoneNumber();
-        final String huaId = person.getHuaId();
-
-        if (this.personRepository.existsByEmailAddressIgnoreCase(emailAddress)) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "email address already exists!");
-        }
-
-        if (this.personRepository.existsByMobilePhoneNumber(mobilePhoneNumber)) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "mobile phone number already exists");
-        }
-
-        if (this.personRepository.existsByHuaId(huaId)) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "HUA ID already exists");
-        }*/
-        /**
-        final CreatePersonResult createPersonResult = this.personService.createPerson(createPersonRequest);
-        if (createPersonResult.created()) {
-            return "redirect:/login"; // registration is successfull, yay!!1!!1!!1
-        }
-        model.addAttribute("createPersonRequest", createPersonRequest); // Pass the same form data.
-        model.addAttribute("errorMessage", createPersonResult.reason()); // Show an error message!
-        return "register";
-        */
         final CreatePersonResult createPersonResult = this.personService.createPerson(createPersonRequest);
 
         if(createPersonResult.created()){

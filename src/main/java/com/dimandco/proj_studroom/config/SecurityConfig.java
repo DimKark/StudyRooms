@@ -28,7 +28,7 @@ public class SecurityConfig {
                 .securityMatcher("/**")
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/", "/login", "/register").permitAll() // Public
-                        .requestMatchers("/profile", "/logout").authenticated() // Private
+                        .requestMatchers("/profile", "/logout", "/reservation").authenticated() // Private
                         .anyRequest().permitAll() // The rest
                 )
                 .formLogin(form -> form

@@ -9,9 +9,13 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 public record CreateReservationRequest(
-        @NotNull @NotBlank StudyRoom room,
-        @NotNull @NotBlank Person student,
-        @NotNull @NotBlank LocalDate date,
-        @NotNull @NotBlank LocalTime from,
-        @NotNull @NotBlank LocalTime to
-) {}
+         String roomName,
+         String studentHuaId,
+         LocalDate date,
+         LocalTime from,
+         LocalTime to
+) {
+    public static CreateReservationRequest empty() {
+        return new CreateReservationRequest(null, null, null, null, null);
+    }
+}

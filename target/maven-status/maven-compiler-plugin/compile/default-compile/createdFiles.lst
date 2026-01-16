@@ -18,6 +18,7 @@ com/dimandco/proj_studroom/core/web/ui/AuthenticatedControllersAdvice.class
 com/dimandco/proj_studroom/core/repository/StudyRoomRepository.class
 com/dimandco/proj_studroom/core/service/StudyRoomService.class
 com/dimandco/proj_studroom/core/service/mapper/ReservationMapper.class
+com/dimandco/proj_studroom/core/web/ui/ReservationController.class
 com/dimandco/proj_studroom/core/service/model/CreateStudyRoomRequest.class
 com/dimandco/proj_studroom/core/port/impl/dto/HuaIdValidationResult.class
 com/dimandco/proj_studroom/core/repository/ReservationRepository.class
