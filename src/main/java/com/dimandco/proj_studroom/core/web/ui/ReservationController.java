@@ -1,5 +1,8 @@
 package com.dimandco.proj_studroom.core.web.ui;
 
+import com.dimandco.proj_studroom.core.model.Person;
+import com.dimandco.proj_studroom.core.repository.PersonRepository;
+import com.dimandco.proj_studroom.core.security.CurrentUser;
 import com.dimandco.proj_studroom.core.service.ReservationService;
 import com.dimandco.proj_studroom.core.service.model.CreateReservationRequest;
 import com.dimandco.proj_studroom.core.service.model.CreateReservationResult;
@@ -15,10 +18,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class ReservationController {
     private final ReservationService reservationService;
+    private final PersonRepository personRepository;
 
-    public ReservationController(ReservationService reservationService) {
+    public ReservationController(ReservationService reservationService,
+                                 PersonRepository personRepository) {
         if(reservationService == null) throw new NullPointerException();
+        if(personRepository == null) throw new NullPointerException();
         this.reservationService = reservationService;
+        this.personRepository = personRepository;
     }
 
     @GetMapping("/reservation")
@@ -30,7 +37,14 @@ public class ReservationController {
             return "redirect:/login";
         }
 
-        model.addAttribute("createReservationRequest", CreateReservationRequest.empty());
+        CurrentUser currentUser = (CurrentUser) model.getAttribute("me");
+        if(currentUser == null) throw new NullPointerException("Current user is null");
+
+        Long studentId = currentUser.id();
+        Person student = personRepository.findById(studentId).orElse(null);
+        if(student == null) throw new NullPointerException("Student is null");
+
+        model.addAttribute("createReservationRequest", CreateReservationRequest.empty(student));
 
         return "reservation";
     }
@@ -43,7 +57,8 @@ public class ReservationController {
     ) {
         if(bindingResult.hasErrors()) return "redirect:/login";
 
-        CreateReservationResult createReservationResult = this.reservationService.createReservation(createReservationRequest);
+        CreateReservationResult createReservationResult =
+                this.reservationService.createReservation(createReservationRequest);
 
         if(createReservationResult.created()) {
             // Show success message

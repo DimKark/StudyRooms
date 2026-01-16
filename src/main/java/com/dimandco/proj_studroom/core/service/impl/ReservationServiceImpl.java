@@ -56,14 +56,11 @@ public class ReservationServiceImpl implements ReservationService {
         // --------------------------------------------------------------
 
         final Optional<StudyRoom> sr = studyRoomRepository.findByNameIgnoreCase(crr.roomName());
-        final Optional<Person> p = personRepository.findByHuaIdIgnoreCase(crr.studentHuaId());
         if(sr.isEmpty()) return CreateReservationResult.fail("Room does not exist");
-        if(p.isEmpty()) return CreateReservationResult.fail("Person does not exist");
 
         RoomReservation reservation = new  RoomReservation();
         reservation.setId(null);
         reservation.setRoom(sr.get());
-        reservation.setStudent(p.get());
         reservation.setDate(crr.date());
         reservation.setFromTime(crr.from());
         reservation.setToTime(crr.to());

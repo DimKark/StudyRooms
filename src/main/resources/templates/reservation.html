@@ -32,11 +32,6 @@
         </div>
 
         <div class="mb-3">
-            <label class="form-label">Student HuaID: </label>
-            <input th:field="*{studentHuaId}" class="form-control" required/>
-        </div>
-
-        <div class="mb-3">
             <label class="form-label">Reservation Date: </label>
             <input type="date" th:field="*{date}" class="form-control" required/>
         </div>
@@ -55,4 +50,15 @@
             <button type="submit" class="btn btn-primary">Create Reservation</button>
         </div>
     </form>
+
+    <hr>
+
+    <ul>
+        <li>
+            <a th:href="@{/homepage}">Home Page</a>
+        </li>
+        <li>
+            <a th:href="@{/logout}">Log Out</a>
+        </li>
+    </ul>
 </section>

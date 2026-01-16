@@ -2,20 +2,26 @@ package com.dimandco.proj_studroom.core.service.model;
 
 import com.dimandco.proj_studroom.core.model.StudyRoom;
 import com.dimandco.proj_studroom.core.model.Person;
+import com.dimandco.proj_studroom.core.web.ui.ReservationController;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 
 public record CreateReservationRequest(
          String roomName,
-         String studentHuaId,
+         Person student,
          LocalDate date,
          LocalTime from,
          LocalTime to
 ) {
-    public static CreateReservationRequest empty() {
-        return new CreateReservationRequest(null, null, null, null, null);
+    /** Returns an empty request with the given student, specifically made for
+     * {@link ReservationController#handleReservationSubmission}
+     */
+    public static CreateReservationRequest empty(Person student) {
+        return new CreateReservationRequest(null, student, null, null, null);
     }
 }

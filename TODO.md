@@ -1,3 +1,5 @@
 - [x] Set up reservation page
+- [x] Make reservation take the logged in user as student
 - [ ] Make reservation history a database
-- [ ] Make reservation take logged in user as student
+    - [ ] Check schelduling conflics between reservations when submitting
+- [ ] Implement Staff specific functions
