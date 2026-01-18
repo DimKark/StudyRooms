@@ -1,6 +1,7 @@
 package com.dimandco.proj_studroom.core.port;
 
 import com.dimandco.proj_studroom.core.model.PersonType;
+import com.dimandco.proj_studroom.core.service.model.InternalHuaIdValidationResult;
 
 import java.util.Optional;
 
@@ -9,5 +10,5 @@ import java.util.Optional;
  */
 public interface HuaIdValidationPort {
 
-    boolean validate(final String huaId);
+    InternalHuaIdValidationResult validate(final String huaId, PersonType type);
 }

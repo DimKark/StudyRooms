@@ -4,6 +4,7 @@ import com.dimandco.proj_studroom.core.model.Person;
 import com.dimandco.proj_studroom.core.model.ReservationLog;
 import com.dimandco.proj_studroom.core.model.StudyRoom;
 import com.dimandco.proj_studroom.core.repository.PersonRepository;
+import com.dimandco.proj_studroom.core.repository.ReservationHistoryRepository;
 import com.dimandco.proj_studroom.core.repository.ReservationRepository;
 import com.dimandco.proj_studroom.core.model.RoomReservation;
 import com.dimandco.proj_studroom.core.repository.StudyRoomRepository;
@@ -20,27 +21,28 @@ import java.util.Optional;
 
 @Service
 public class ReservationServiceImpl implements ReservationService {
-    private static List<ReservationLog> reservationHistory;
-
     private final ReservationMapper reservationMapper;
     private final ReservationRepository reservationRepository;
     private final StudyRoomRepository studyRoomRepository;
     private final PersonRepository personRepository;
+    private final ReservationHistoryRepository reservationHistoryRepository;
 
     public ReservationServiceImpl(ReservationMapper reservationMapper,
                                   ReservationRepository reservationRepository,
                                   StudyRoomRepository studyRoomRepository,
-                                  PersonRepository personRepository) {
+                                  PersonRepository personRepository,
+                                  ReservationHistoryRepository reservationHistoryRepository) {
         if(reservationMapper == null) throw new NullPointerException("reservationMapper is null");
         if(reservationRepository == null) throw new NullPointerException("reservationMapper is null");
         if(studyRoomRepository == null) throw new NullPointerException("reservationMapper is null");
         if(personRepository == null) throw new NullPointerException("reservationMapper is null");
+        if(reservationHistoryRepository == null)
+            throw new NullPointerException("reservationHistoryRepository is null");
         this.reservationMapper = reservationMapper;
         this.reservationRepository = reservationRepository;
         this.studyRoomRepository = studyRoomRepository;
         this.personRepository = personRepository;
-
-        this.reservationHistory = new ArrayList<>();
+        this.reservationHistoryRepository = reservationHistoryRepository;
     }
 
     @Override
@@ -77,7 +79,7 @@ public class ReservationServiceImpl implements ReservationService {
                 this.reservationMapper.convertReservationToReservationView(reservation);
 
         // Save reservation to history
-        reservationHistory.add(new ReservationLog(reservation));
+        reservationHistoryRepository.save(new ReservationLog(reservation));
 
         return CreateReservationResult.success(reservationView);
     }
@@ -90,7 +92,8 @@ public class ReservationServiceImpl implements ReservationService {
         else return false;
     }
 
-    /** Print reservation history for debug purposes */
+    ///** Print reservation history for debug purposes */
+    /*
     public static String getReservationHistory() {
         StringBuilder s = new StringBuilder();
         for(ReservationLog rl : reservationHistory) {
@@ -99,5 +102,6 @@ public class ReservationServiceImpl implements ReservationService {
 
         return s.toString();
     }
+    */
 }
 

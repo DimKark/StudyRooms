@@ -1,5 +1,6 @@
 package com.dimandco.proj_studroom.core.service.impl;
 
+import com.dimandco.proj_studroom.core.model.ValidationFailReason;
 import com.dimandco.proj_studroom.core.service.mapper.PersonMapper;
 import com.dimandco.proj_studroom.core.repository.PersonRepository;
 import com.dimandco.proj_studroom.core.model.Person;
@@ -8,6 +9,7 @@ import com.dimandco.proj_studroom.core.port.HuaIdValidationPort;
 import com.dimandco.proj_studroom.core.service.PersonService;
 import com.dimandco.proj_studroom.core.service.model.CreatePersonRequest;
 import com.dimandco.proj_studroom.core.service.model.CreatePersonResult;
+import com.dimandco.proj_studroom.core.service.model.InternalHuaIdValidationResult;
 import com.dimandco.proj_studroom.core.service.model.PersonView;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validator;
@@ -120,8 +122,13 @@ public class PersonServiceImpl implements PersonService {
         // -------------------------------------------
 
         // Use external service to validate Hua ID
-        final boolean validHuaId = this.huaIdValidationPort.validate(huaId);
-        if (!validHuaId) return CreatePersonResult.fail("Invalid HUA ID");
+        final InternalHuaIdValidationResult validationResult = this.huaIdValidationPort.validate(huaId, type);
+        if (!validationResult.valid()) {
+            if(validationResult.reason() == ValidationFailReason.INVALID_HUA_ID)
+                return CreatePersonResult.fail("Invalid Hua ID");
+            else return CreatePersonResult.fail(
+                    "Student Hua ID must start with 'it' and staff Hua ID must start with 'sr'");
+        }
 
         // -------------------------------------------
 
