@@ -71,6 +71,23 @@ public final class StudyRoom {
         return !(from.isBefore(this.openFrom) || to.isAfter(this.openTo));
     }
 
+    private boolean isStaff(String staffId) {
+        //TODO staffId check
+        return true;
+    }
+
+    public void updateDetails(String staffId ,int capacity, LocalTime openFrom, LocalTime openTo) {
+        if (!isStaff(staffId)) return;
+        this.capacity = capacity;
+        this.openFrom = openFrom;
+        this.openTo = openTo;
+    }
+
+    public void updateAvailability(String staffId ,boolean active) {
+        if (!isStaff(staffId)) return;
+        this.active = active;
+    }
+
     @Override
     public String toString() {
         String s =

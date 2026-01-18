@@ -91,6 +91,23 @@ public final class RoomReservation {
 
     // -------------------------------------------------------------
 
+
+    public boolean isActive(String staffId) {
+        if (!isStaff(staffId)) return false;
+        return active;
+    }
+
+    public boolean cancelReservation(String staffId) {
+        if (!isStaff(staffId)) return false;
+        this.active = false;
+        return true;
+    }
+
+    private boolean isStaff(String staffId) {
+        //TODO staffId check
+        return true;
+    }
+
     public boolean overlaps(LocalTime from, LocalTime to) {
         return from.isBefore(this.toTime) && to.isAfter(this.fromTime);
     }
