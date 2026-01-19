@@ -48,29 +48,36 @@ public class ReservationServiceImpl implements ReservationService {
     @Override
     public CreateReservationResult createReservation(CreateReservationRequest crr) {
 
-        /* TODO Create replacement for this code
-        for (RoomReservation r : reservations) {
-            if (r.getActive() && r.overlaps(crr.from(), crr. to()))
-                return CreateReservationResult.fail("There is already a reservation at this time");
-        }
-        */
-
         // --------------------------------------------------------------
 
-        final Optional<StudyRoom> sr = studyRoomRepository.findByNameIgnoreCase(crr.roomName());
-        if(sr.isEmpty()) return CreateReservationResult.fail("Room does not exist");
+        final Optional<StudyRoom> srOpt = studyRoomRepository.findByNameIgnoreCase(crr.roomName());
+        if(srOpt.isEmpty()) return CreateReservationResult.fail("Room does not exist");
 
         RoomReservation reservation = new  RoomReservation();
         reservation.setId(null);
-        reservation.setRoom(sr.get());
+        reservation.setRoom(srOpt.get());
+        reservation.setStudent(crr.student());
         reservation.setDate(crr.date());
         reservation.setFromTime(crr.from());
         reservation.setToTime(crr.to());
         reservation.setActive(true);
 
-        if(sr.get().isWithinOpeningTime(crr.from(), crr.to()))
-            return CreateReservationResult.fail("Desired time is outside opening hours");
+        // Check if reservation time is withing room opening hours
+        StudyRoom sr = reservation.getRoom();
+        if(!reservation.getRoom().isWithinOpeningTime(reservation.getFromTime(), reservation.getToTime()))
+            return CreateReservationResult.fail("Desired time is outside opening hours (" +
+                    sr.getOpenFrom() + " - " + sr.getOpenTo() + ")");
 
+        // Check if desired room is free on specific date and time
+        List<RoomReservation> rl = reservationRepository.findAll();
+        for(RoomReservation rr : rl) {
+            if(reservation.overlaps(rr)) {
+                return CreateReservationResult.fail(
+                        "There is already a reservation on this room from " +
+                        rr.getFromTime().toString() + " to " + rr.getToTime().toString()
+                );
+            }
+        }
         // --------------------------------------------------------------
 
         reservation = reservationRepository.save(reservation);

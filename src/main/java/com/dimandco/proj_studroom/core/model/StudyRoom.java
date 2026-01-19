@@ -99,5 +99,12 @@ public final class StudyRoom {
 
         return s;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if(!(o instanceof StudyRoom)) return false;
+
+        return this.id.equals(((StudyRoom)o).id);
+    }
 }
 

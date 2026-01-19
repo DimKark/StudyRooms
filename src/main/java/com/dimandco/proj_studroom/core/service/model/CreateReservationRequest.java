@@ -21,7 +21,18 @@ public record CreateReservationRequest(
     /** Returns an empty request with the given student, specifically made for
      * {@link ReservationController#handleReservationSubmission}
      */
-    public static CreateReservationRequest empty(Person student) {
-        return new CreateReservationRequest(null, student, null, null, null);
+    public static CreateReservationRequest empty() {
+        return new CreateReservationRequest(null, null, null, null, null);
+    }
+
+    /** Returns the same {@link CreateReservationRequest} with added student */
+    public static CreateReservationRequest withStudent(CreateReservationRequest crr, Person student) {
+        return new CreateReservationRequest(
+                crr.roomName(),
+                student,
+                crr.date(),
+                crr.from(),
+                crr.to()
+        );
     }
 }

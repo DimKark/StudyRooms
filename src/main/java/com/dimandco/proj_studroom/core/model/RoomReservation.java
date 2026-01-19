@@ -108,8 +108,26 @@ public final class RoomReservation {
         return true;
     }
 
-    public boolean overlaps(LocalTime from, LocalTime to) {
-        return from.isBefore(this.toTime) && to.isAfter(this.fromTime);
+    /** Checks if given time overlaps with its own */
+    public boolean overlaps(RoomReservation rr) {
+        System.out.println("Active: " + active);
+        if(!active) return false;
+
+        StudyRoom r = rr.getRoom();
+        System.out.println("Is same room: " + this.room.equals(r));
+        if(!this.room.equals(r)) return false;
+
+        System.out.println("Is same date: " + date.equals(this.date));
+        LocalDate date = rr.getDate();
+        if(!date.equals(this.date)) return false;
+
+        LocalTime from =  rr.getFromTime();
+        LocalTime to =  rr.getToTime();
+
+        System.out.println("Is within time: " + (from.isAfter(this.fromTime) && from.isBefore(this.toTime) ||
+                to.isAfter(this.fromTime) && to.isBefore(this.toTime)));
+        return (from.isAfter(this.fromTime) && from.isBefore(this.toTime) ||
+                to.isAfter(this.fromTime) && to.isBefore(this.toTime));
     }
 
     @Override

@@ -69,8 +69,8 @@ public class TestController {
         CreateStudyRoomRequest csrr = new CreateStudyRoomRequest(
                 "testRoom",
                 10,
-                LocalTime.now(),
-                LocalTime.now(),
+                LocalTime.of(10, 0),
+                LocalTime.of(20, 0),
                 true
         );
         this.studyRoomService.createStudyRoom(csrr);

@@ -37,14 +37,8 @@ public class ReservationController {
             return "redirect:/login";
         }
 
-        CurrentUser currentUser = (CurrentUser) model.getAttribute("me");
-        if(currentUser == null) throw new NullPointerException("Current user is null");
-
-        Long studentId = currentUser.id();
-        Person student = personRepository.findById(studentId).orElse(null);
-        if(student == null) throw new NullPointerException("Student is null");
-
-        model.addAttribute("createReservationRequest", CreateReservationRequest.empty(student));
+        CreateReservationRequest crr = CreateReservationRequest.empty();
+        model.addAttribute("createReservationRequest", crr);
 
         return "reservation";
     }
@@ -57,8 +51,14 @@ public class ReservationController {
     ) {
         if(bindingResult.hasErrors()) return "redirect:/login";
 
+        CurrentUser currentUser = (CurrentUser) model.getAttribute("me");
+        Long studentId = currentUser.id();
+        Person student = personRepository.findById(studentId).orElse(null);
+        if(student == null) throw new NullPointerException("Student is null");
+
+        CreateReservationRequest newCrr = CreateReservationRequest.withStudent(createReservationRequest, student);
         CreateReservationResult createReservationResult =
-                this.reservationService.createReservation(createReservationRequest);
+                this.reservationService.createReservation(newCrr);
 
         if(createReservationResult.created()) {
             // Show success message

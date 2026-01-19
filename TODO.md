@@ -2,5 +2,6 @@
 - [x] Make reservation take the logged in user as student
 - [x] Make reservation history a database
 - [x] Make staff accounts use different Hua IDs
-- [ ] Check schelduling conflics between reservations when submitting
+- [x] Check schelduling conflics between reservations when submitting
+- [ ] Print list of rooms on reservation page
 - [ ] Implement Staff specific functions
