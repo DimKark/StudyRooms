@@ -21,6 +21,7 @@
             <p class="text-danger n-0 p-0" th:text="${errorMessage}"></p>
         </div>
 
+        <!--
         <div class="mb-3">
             <label class="form-label">Role: </label>
             <select name="type" th:field="*{type}" class="form-select">
@@ -29,6 +30,24 @@
             </select>
             <div class="text-danger small mt-1" th:if="${#fields.hasErrors('type')}" th:errors="*{type}"></div>
         </div>
+        -->
+
+        <!-- TEST -->
+
+        <!--
+        <input type="radio" class="btn-check" name="options-base" id="option5" autocomplete="off" checked>
+        <label class="btn" for="option5">Checked</label>
+        -->
+
+        <input class="btn-check" type="radio" name="options-base" autocomplete="off" checked
+               id="type-radio-student" value="STUDENT" th:field="*{type}">
+        <label class="btn btn-secondary" for="type-radio-student">Student</label>
+
+        <input class="btn-check" type="radio" name="options-base" autocomplete="off"
+               id="type-radio-staff" value="STAFF" th:field="*{type}">
+        <label class="btn btn-secondary" for="type-radio-staff">Staff</label>
+        <hr>
+        <!-- ------------------- -->
 
         <div class="mb-3">
             <label class="form-label">HUA ID: </label>
@@ -56,8 +75,11 @@
 
         <div class="mb-3">
             <label class="form-label">Phone Number: </label>
-            <input th:field="*{mobilePhoneNumber}" class="form-control" required/>
-            <div class="text-danger small mt-1" th:if="${#fields.hasErrors('mobilePhoneNumber')}" th:errors="*{mobilePhoneNumber}"></div>
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1">+30</span>
+                <input type="text" th:field="*{mobilePhoneNumber}" class="form-control" required/>
+                <div class="text-danger small mt-1" th:if="${#fields.hasErrors('mobilePhoneNumber')}" th:errors="*{mobilePhoneNumber}"></div>
+            </div>
         </div>
 
         <div class="mb-3">
@@ -70,6 +92,8 @@
             <button type="submit" class="btn btn-primary">Create Account</button>
         </div>
     </form>
+
+
 
     <p class="m-0 p-0">
         <a th:href="@{/login}">Log In</a>

@@ -3,5 +3,4 @@
 - [x] Make reservation history a database
 - [x] Make staff accounts use different Hua IDs
 - [x] Check schelduling conflics between reservations when submitting
-- [ ] Print list of rooms on reservation page
 - [ ] Implement Staff specific functions

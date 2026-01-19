@@ -14,22 +14,28 @@
 
     <!-- Custom Styles -->
     <style>
+        body {
+            background-color: #373d43;
+            color: #dfdfdf;
+        }
         .app-container {
             margin: 0 auto;
             max-width: 600px;
             box-shadow:12px 12px black;
             border: 4px solid black;
+            background-color: #212529;
         }
         .form-control, .form-select {
             border: 2px solid #9a9a9a;
-            border-radius: 0;
+            background-color: #dfdfdf;
+            border-radius: .25rem;
         }
         .form-label {
             text-transform: uppercase;
             margin-bottom: 2px;
             font-weight: bold;
             letter-spacing: 1px;
-            color: #7c7c7c;
+            color: #dfdfdf;
             font-size: 12px;
         }
         .app-container .btn-primary {
@@ -37,13 +43,18 @@
             border: 0;
             padding: 0.5em 4em;
         }
+        .btn-secondary {
+            background-color: #373d43;
+            color: white;
+            border-color: black;
+        }
     </style>
 </head>
 
 <body>
 <header class="text-center p-4" layout:fragment="header"></header>
 
-<main class="app-container p-4" layout:fragment="main"></main>
+<main class="app-container rounded p-4" layout:fragment="main"></main>
 
 <footer class="text-center p-4 at-4" layout:fragment="footer">
     <small>&copy; 2025 Study Rooms</small>
