@@ -63,7 +63,7 @@ public class TestController {
         return null; // Unreachable
     }
 
-    @GetMapping("test/reservation")
+    @GetMapping("/demonstration")
     public String testDb(Model m) {
         if(m == null) throw new NullPointerException();
 
@@ -71,10 +71,10 @@ public class TestController {
 
         CreatePersonRequest cpr = new CreatePersonRequest(
                 PersonType.STUDENT,
-                "it2023107",
+                "it2023001",
                 "Test",
                 "User",
-                "test@hua.gr",
+                "it2023001@hua.gr",
                 "6945280161",
                 "1234"
         );
@@ -83,11 +83,11 @@ public class TestController {
 
         cpr = new CreatePersonRequest(
                 PersonType.STAFF,
-                "sr1111111",
+                "sr2023001",
                 "Test",
                 "Staff",
-                "1@hua.gr",
-                "99999999999",
+                "sr2023001@hua.gr",
+                "9999999999",
                 "1234"
         );
         r = this.personService.createPerson(cpr);

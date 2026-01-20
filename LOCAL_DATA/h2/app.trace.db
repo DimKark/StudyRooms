@@ -7677,3 +7677,27 @@ Caused by: org.h2.mvstore.MVStoreException: The file is locked: /home/dimk/lab/s
 	at org.h2.mvstore.SingleFileStore.open(SingleFileStore.java:81)
 	at org.h2.mvstore.MVStore.<init>(MVStore.java:286)
 	... 64 more
+2026-01-20 20:58:47.104899+02:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "hte_room_reservation" already exists; SQL statement:
+create global temporary table HTE_room_reservation(active boolean, date date, from_time time(6), rn_ integer not null, to_time time(6), id bigint, room_id bigint, student_id bigint, primary key (rn_)) TRANSACTIONAL [42101-232]
+2026-01-20 20:58:47.109906+02:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "hte_reservation_history" already exists; SQL statement:
+create global temporary table HTE_reservation_history(rn_ integer not null, id bigint, reservation_date timestamp(6) with time zone, reservation_id bigint, primary key (rn_)) TRANSACTIONAL [42101-232]
+2026-01-20 20:58:47.109906+02:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "hte_person" already exists; SQL statement:
+create global temporary table HTE_person(rn_ integer not null, created_at timestamp(6) with time zone, id bigint, mobile_phone_number varchar(18), hua_id varchar(20), email_address varchar(100), first_name varchar(100), last_name varchar(100), password_hash varchar(255), type enum ('STAFF','STUDENT'), primary key (rn_)) TRANSACTIONAL [42101-232]
+2026-01-20 20:58:47.110913+02:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "hte_study_room" already exists; SQL statement:
+create global temporary table HTE_study_room(active boolean, capacity integer, open_from time(6), open_to time(6), rn_ integer not null, id bigint, name varchar(255), primary key (rn_)) TRANSACTIONAL [42101-232]
+2026-01-20 20:58:49.401529+02:00 jdbc[23]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "hte_room_reservation" already exists; SQL statement:
+create global temporary table HTE_room_reservation(active boolean, date date, from_time time(6), rn_ integer not null, to_time time(6), id bigint, room_id bigint, student_id bigint, primary key (rn_)) TRANSACTIONAL [42101-232]
+2026-01-20 20:58:49.401529+02:00 jdbc[23]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "hte_reservation_history" already exists; SQL statement:
+create global temporary table HTE_reservation_history(rn_ integer not null, id bigint, reservation_date timestamp(6) with time zone, reservation_id bigint, primary key (rn_)) TRANSACTIONAL [42101-232]
+2026-01-20 20:58:49.401529+02:00 jdbc[23]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "hte_person" already exists; SQL statement:
+create global temporary table HTE_person(rn_ integer not null, created_at timestamp(6) with time zone, id bigint, mobile_phone_number varchar(18), hua_id varchar(20), email_address varchar(100), first_name varchar(100), last_name varchar(100), password_hash varchar(255), type enum ('STAFF','STUDENT'), primary key (rn_)) TRANSACTIONAL [42101-232]
+2026-01-20 20:58:49.403036+02:00 jdbc[23]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "hte_study_room" already exists; SQL statement:
+create global temporary table HTE_study_room(active boolean, capacity integer, open_from time(6), open_to time(6), rn_ integer not null, id bigint, name varchar(255), primary key (rn_)) TRANSACTIONAL [42101-232]
