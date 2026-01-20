@@ -28,7 +28,6 @@ com/dimandco/proj_studroom/core/service/impl/PersonServiceImpl.class
 com/dimandco/proj_studroom/core/model/RoomReservation.class
 com/dimandco/proj_studroom/core/model/ReservationLog.class
 com/dimandco/proj_studroom/core/service/model/InternalHuaIdValidationResult.class
-com/dimandco/proj_studroom/core/model/Ticket.class
 com/dimandco/proj_studroom/core/security/ApplicationUserDetailsService.class
 com/dimandco/proj_studroom/core/web/ui/AuthUtils.class
 com/dimandco/proj_studroom/core/model/PersonType.class
@@ -40,7 +39,6 @@ com/dimandco/proj_studroom/core/web/ui/RegistrationController.class
 com/dimandco/proj_studroom/core/port/impl/package-info.class
 com/dimandco/proj_studroom/core/service/model/CreateReservationResult.class
 com/dimandco/proj_studroom/core/security/CurrentUserProvider.class
-com/dimandco/proj_studroom/core/model/TicketStatus.class
 com/dimandco/proj_studroom/core/port/HuaIdValidationPort.class
 com/dimandco/proj_studroom/core/service/model/StudyRoomView.class
 com/dimandco/proj_studroom/core/service/model/ModifyStudyRoomRequest.class

@@ -72,7 +72,6 @@ public final class StudyRoom {
     }
 
     private boolean isStaff(String staffId) {
-        //TODO staffId check
         return true;
     }
 

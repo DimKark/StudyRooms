@@ -9,8 +9,6 @@
 /home/dimk/lab/sem5/studyrooms/StudyRooms/src/main/java/com/dimandco/proj_studroom/core/model/ReservationLog.java
 /home/dimk/lab/sem5/studyrooms/StudyRooms/src/main/java/com/dimandco/proj_studroom/core/model/RoomReservation.java
 /home/dimk/lab/sem5/studyrooms/StudyRooms/src/main/java/com/dimandco/proj_studroom/core/model/StudyRoom.java
-/home/dimk/lab/sem5/studyrooms/StudyRooms/src/main/java/com/dimandco/proj_studroom/core/model/Ticket.java
-/home/dimk/lab/sem5/studyrooms/StudyRooms/src/main/java/com/dimandco/proj_studroom/core/model/TicketStatus.java
 /home/dimk/lab/sem5/studyrooms/StudyRooms/src/main/java/com/dimandco/proj_studroom/core/model/ValidationFailReason.java
 /home/dimk/lab/sem5/studyrooms/StudyRooms/src/main/java/com/dimandco/proj_studroom/core/port/HuaIdValidationPort.java
 /home/dimk/lab/sem5/studyrooms/StudyRooms/src/main/java/com/dimandco/proj_studroom/core/port/impl/HuaIdValidationPortImpl.java

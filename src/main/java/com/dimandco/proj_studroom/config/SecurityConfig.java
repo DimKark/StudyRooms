@@ -18,7 +18,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @Configuration
 @EnableMethodSecurity
 public class SecurityConfig {
-    // TODO API Security (stateless - JWT based)
 
     /** UI chain {@code "/**"} (stateful - cookie based) */
     @Bean
@@ -28,7 +27,7 @@ public class SecurityConfig {
                 .securityMatcher("/**")
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/", "/login", "/register").permitAll() // Public
-                        .requestMatchers("/profile", "/logout", "/reservation").authenticated() // Private
+                        .requestMatchers("/profile", "/logout", "/reservation", "studyRoomList", "cancelReservation", "modifyStudyRoom").authenticated() // Private
                         .anyRequest().permitAll() // The rest
                 )
                 .formLogin(form -> form

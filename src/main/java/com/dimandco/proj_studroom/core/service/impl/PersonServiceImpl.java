@@ -92,7 +92,6 @@ public class PersonServiceImpl implements PersonService {
 
         // ------------------------------------------
 
-        // TODO Validate createPersonRequest
 
         final PersonType type = createPersonRequest.type();
         final String huaId = createPersonRequest.huaId().strip();
