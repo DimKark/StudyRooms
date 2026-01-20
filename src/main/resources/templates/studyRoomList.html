@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{base}">
+
+<head>
+  <title>Study Room List</title>
+</head>
+
+<body>
+<header layout:fragment="header">
+  <h1>Study Rooms <small>/ List</small></h1>
+</header>
+
+<section layout:fragment="main">
+  <p th:if="${rooms.size()} == 0">There are no rooms</p>
+  <ul th:each="room : ${rooms}">
+    <li th:text="${room.getName()}"/>
+    <li th:text="'Capacity: ' + ${room.getCapacity()}"/>
+    <li th:text="'Open: ' + ${room.getOpenFrom()} + ' - ' + ${room.getOpenTo()}"/>
+    <li th:text="${room.getActive()} ? 'ACTIVE' : 'INACTIVE'"/>
+  </ul>
+
+  <hr>
+  <a th:href="@{/modifyStudyRoom}">Modify a room</a>
+</section>

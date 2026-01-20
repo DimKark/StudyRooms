@@ -3,4 +3,6 @@
 - [x] Make reservation history a database
 - [x] Make staff accounts use different Hua IDs
 - [x] Check schelduling conflics between reservations when submitting
-- [ ] Implement Staff specific functions
+- [x] Implement Staff specific functions
+- [x] Implement cancelling reservation by staff
+- [ ] Add final data input checks

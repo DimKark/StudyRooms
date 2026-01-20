@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.List;
 
 /**
  * Controller for <strong>testing</strong>
@@ -66,14 +67,7 @@ public class TestController {
     public String testDb(Model m) {
         if(m == null) throw new NullPointerException();
 
-        CreateStudyRoomRequest csrr = new CreateStudyRoomRequest(
-                "testRoom",
-                10,
-                LocalTime.of(10, 0),
-                LocalTime.of(20, 0),
-                true
-        );
-        this.studyRoomService.createStudyRoom(csrr);
+        createRooms();
 
         CreatePersonRequest cpr = new CreatePersonRequest(
                 PersonType.STUDENT,
@@ -84,8 +78,54 @@ public class TestController {
                 "6945280161",
                 "1234"
         );
-        this.personService.createPerson(cpr);
+        CreatePersonResult r = this.personService.createPerson(cpr);
+        if(!r.created()) System.out.println(r.reason());
+
+        cpr = new CreatePersonRequest(
+                PersonType.STAFF,
+                "sr1111111",
+                "Test",
+                "Staff",
+                "1@hua.gr",
+                "99999999999",
+                "1234"
+        );
+        r = this.personService.createPerson(cpr);
+        if(!r.created()) System.out.println(r.reason());
 
         return "login";
+    }
+
+    private void createRooms() {
+        CreateStudyRoomRequest csrr = new CreateStudyRoomRequest(
+                "Room 1-1",
+                10,
+                LocalTime.of(10, 0),
+                LocalTime.of(20, 0),
+                true
+        );
+        this.studyRoomService.createStudyRoom(csrr);
+
+        csrr = new CreateStudyRoomRequest(
+                "Room 1-2",
+                        15,
+                LocalTime.of(8, 0),
+                LocalTime.of(21, 0),
+                        true
+        );
+        this.studyRoomService.createStudyRoom(csrr);
+
+        csrr = new CreateStudyRoomRequest(
+                "Room 2-1",
+                7,
+                LocalTime.of(9, 0),
+                LocalTime.of(19, 0),
+                false
+        );
+        this.studyRoomService.createStudyRoom(csrr);
+    }
+
+    public List<RoomReservation> getRoomReservations(Long id) {
+        return  this.reservationRepository.findAllByRoom_Id(id);
     }
 }

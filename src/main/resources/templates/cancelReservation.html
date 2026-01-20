@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{base}">
+
+<head>
+  <title>Study Room List</title>
+</head>
+
+<body>
+<header layout:fragment="header">
+  <h1>Study Rooms <small>/ Cancel Reservation</small></h1>
+</header>
+
+<section layout:fragment="main">
+  <p>Please select the reservation to be cancelled:</p>
+  <hr>
+  <form th:action="@{/cancelReservation}" method="post" th:object="${cancelReservationRequest}">
+    <!-- ERROR MESSAGE -->
+    <div class="text-center mb-3" th:if="${error != null}">
+      <p class="text-danger" th:text="${error}"/>
+    </div>
+
+    <!-- SUCCESS MESSAGE -->
+    <div class="text-center mb-3" th:if="${message != null}">
+      <p class="text-primary" th:text="${message}"/>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Reservation:</label>
+      <select th:field="*{id}" name="room" class="form-select">
+        <option th:each="res : ${reservations}"
+                th:text="${res.toString()}"
+                th:value="${res.getId()}"/>
+      </select>
+    </div>
+
+    <div class="mb-4">
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+  </form>
+  <hr>
+  <a th:href="@{/studyRoomList}">Room List</a>
+</section>

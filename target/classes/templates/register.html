@@ -21,24 +21,6 @@
             <p class="text-danger n-0 p-0" th:text="${errorMessage}"></p>
         </div>
 
-        <!--
-        <div class="mb-3">
-            <label class="form-label">Role: </label>
-            <select name="type" th:field="*{type}" class="form-select">
-                <option value="STUDENT">STUDENT</option>
-                <option value="STAFF">STAFF</option>
-            </select>
-            <div class="text-danger small mt-1" th:if="${#fields.hasErrors('type')}" th:errors="*{type}"></div>
-        </div>
-        -->
-
-        <!-- TEST -->
-
-        <!--
-        <input type="radio" class="btn-check" name="options-base" id="option5" autocomplete="off" checked>
-        <label class="btn" for="option5">Checked</label>
-        -->
-
         <input class="btn-check" type="radio" name="options-base" autocomplete="off" checked
                id="type-radio-student" value="STUDENT" th:field="*{type}">
         <label class="btn btn-secondary" for="type-radio-student">Student</label>
@@ -75,7 +57,7 @@
 
         <div class="mb-3">
             <label class="form-label">Phone Number: </label>
-            <div class="input-group mb-3">
+            <div class="input-group mb-3 flex-nowrap">
                 <span class="input-group-text" id="basic-addon1">+30</span>
                 <input type="text" th:field="*{mobilePhoneNumber}" class="form-control" required/>
                 <div class="text-danger small mt-1" th:if="${#fields.hasErrors('mobilePhoneNumber')}" th:errors="*{mobilePhoneNumber}"></div>
@@ -94,9 +76,12 @@
     </form>
 
 
-
+    <hr>
     <p class="m-0 p-0">
         <a th:href="@{/login}">Log In</a>
+    </p>
+    <p class="m-0 p-0">
+        <a th:href="@{/}">Home Page</a>
     </p>
 
 </section>

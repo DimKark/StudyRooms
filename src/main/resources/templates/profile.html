@@ -14,20 +14,49 @@
 </header>
 
 <section layout:fragment="main">
+  <!-- Error Message -->
+  <div class="text-center mb-3" th:if="${errorMessage != null}">
+    <p class="text-danger n-0 p-0" th:text="${errorMessage}"></p>
+  </div>
+
+  <!-- Success Message -->
+  <div class="text-center mb-3" th:if="${message != null}">
+    <p class="text-primary" th:text="${message}"></p>
+  </div>
 
   <div>
     <div>
-      <a th:href="@{/profile}" th:text="'Logged in as: ' + ${me.emailAddress()} + ' (' + ${me.type()} + ')'"></a>
+      <p th:text="'Logged in as: ' + ${me.emailAddress()} + ' (' + ${me.type()} + ')'"></p>
     </div>
 
     <hr>
 
-    <ul>
+    <!-- Options of user is a Student -->
+    <ul th:if="${me.type().toString() == 'STUDENT'}">
       <li>
-        <a th:href="@{/reservation}">Make a reservation</a>
+        <p><a th:href="@{/reservation}">Make a reservation</a></p>
       </li>
       <li>
-        <a th:href="@{/logout}">Log Out</a>
+        <p><a th:href="@{/logout}">Log Out</a></p>
+      </li>
+      <li>
+        <p><a th:href="@{/}">Home Page</a></p>
+      </li>
+    </ul>
+
+    <!-- Options if the user is a Staff member -->
+    <ul th:if="${me.type().toString() == 'STAFF'}">
+      <li>
+        <p><a th:href="@{/studyRoomList}">Study room list</a></p>
+      </li>
+      <li>
+        <p><a th:href="@{cancelReservation}">Cancel a reservation</a></p>
+      </li>
+      <li>
+        <p><a th:href="@{/logout}">Log out</a></p>
+      </li>
+      <li>
+        <p><a th:href="@{/}">Home</a></p>
       </li>
     </ul>
   </div>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{base}">
+
+<head>
+  <title>Study Room List</title>
+</head>
+
+<body>
+<header layout:fragment="header">
+  <h1>Study Rooms <small>/ Modify Room</small></h1>
+</header>
+
+<section layout:fragment="main">
+  <p>If you want to change the room properties, please fill the desired fields:</p>
+  <hr>
+  <form th:action="@{/modifyStudyRoom}" method="post" th:object="${modifyStudyRoomRequest}">
+    <!-- ERROR MESSAGE -->
+    <div class="text-center mb-3" th:if="${error != null}">
+      <p class="text-danger" th:text="${error}"/>
+    </div>
+
+    <!-- SUCCESS MESSAGE -->
+    <div class="text-center mb-3" th:if="${message != null}">
+      <p class="text-primary" th:text="${message}"/>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Room:</label>
+      <select th:field="*{roomId}" name="room" class="form-select">
+        <option th:each="room : ${rooms}" th:text="${room.getName()}"
+                th:value="${room.getId()}"/>
+      </select>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Capacity:</label>
+      <input type="number" th:field="*{capacity}" class="form-control"/>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Opening time:</label>
+      <input type="time" th:field="*{openFrom}" class="form-control"/>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Closing time:</label>
+      <input type="time" th:field="*{openTo}" class="form-control"/>
+    </div>
+
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox" th:field="*{toggleActive}" id="toggleactive"/>
+      <label class="form-check-label" for="toggleactive">Switch active state</label>
+    </div>
+
+    <div class="mb-4">
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+  </form>
+  <hr>
+  <a th:href="@{/studyRoomList}">Room List</a>
+</section>

@@ -56,6 +56,11 @@ public class ReservationController {
         Person student = personRepository.findById(studentId).orElse(null);
         if(student == null) throw new NullPointerException("Student is null");
 
+        if(createReservationRequest.from().isAfter(createReservationRequest.to())) {
+            model.addAttribute("error", "Invalid time period");
+            return "reservation";
+        }
+
         CreateReservationRequest newCrr = CreateReservationRequest.withStudent(createReservationRequest, student);
         CreateReservationResult createReservationResult =
                 this.reservationService.createReservation(newCrr);

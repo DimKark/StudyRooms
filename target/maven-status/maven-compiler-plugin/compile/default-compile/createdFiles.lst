@@ -10,12 +10,14 @@ com/dimandco/proj_studroom/core/repository/PersonRepository.class
 com/dimandco/proj_studroom/config/RestApiClientConfig.class
 com/dimandco/proj_studroom/StudyRoomsApplication.class
 com/dimandco/proj_studroom/config/SecurityConfig.class
+com/dimandco/proj_studroom/core/service/model/CancelReservationRequest.class
 com/dimandco/proj_studroom/core/service/model/CreatePersonRequest.class
 com/dimandco/proj_studroom/core/ReservationLogic.class
 com/dimandco/proj_studroom/core/security/ApplicationUserDetails.class
 com/dimandco/proj_studroom/core/service/InitializeService.class
 com/dimandco/proj_studroom/core/web/ui/AuthenticatedControllersAdvice.class
 com/dimandco/proj_studroom/core/repository/StudyRoomRepository.class
+com/dimandco/proj_studroom/core/web/ui/StaffController.class
 com/dimandco/proj_studroom/core/service/StudyRoomService.class
 com/dimandco/proj_studroom/core/service/mapper/ReservationMapper.class
 com/dimandco/proj_studroom/core/web/ui/ReservationController.class
@@ -41,6 +43,7 @@ com/dimandco/proj_studroom/core/security/CurrentUserProvider.class
 com/dimandco/proj_studroom/core/model/TicketStatus.class
 com/dimandco/proj_studroom/core/port/HuaIdValidationPort.class
 com/dimandco/proj_studroom/core/service/model/StudyRoomView.class
+com/dimandco/proj_studroom/core/service/model/ModifyStudyRoomRequest.class
 com/dimandco/proj_studroom/core/web/rest/PersonResource.class
 com/dimandco/proj_studroom/core/service/model/CreatePersonResult.class
 com/dimandco/proj_studroom/core/security/CurrentUser.class

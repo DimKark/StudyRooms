@@ -88,20 +88,11 @@ public final class RoomReservation {
 
     public boolean getActive() { return active; }
     public void setActive(boolean active) { this.active = active; }
+    public void cancelReservation() { this.setActive(false); }
 
     // -------------------------------------------------------------
 
 
-    public boolean isActive(String staffId) {
-        if (!isStaff(staffId)) return false;
-        return active;
-    }
-
-    public boolean cancelReservation(String staffId) {
-        if (!isStaff(staffId)) return false;
-        this.active = false;
-        return true;
-    }
 
     private boolean isStaff(String staffId) {
         //TODO staffId check
@@ -110,25 +101,22 @@ public final class RoomReservation {
 
     /** Checks if given time overlaps with its own */
     public boolean overlaps(RoomReservation rr) {
-        if(!active) return false;
+        if(!this.active) return false;
         if(!this.room.equals(rr.getRoom())) return false;
         if(!rr.getDate().equals(this.date)) return false;
 
         LocalTime from =  rr.getFromTime();
         LocalTime to =  rr.getToTime();
+
         return (from.isAfter(this.fromTime) && from.isBefore(this.toTime) ||
-                to.isAfter(this.fromTime) && to.isBefore(this.toTime));
+                to.isAfter(this.fromTime) && to.isBefore(this.toTime)) ||
+                from.equals(this.fromTime) || to.equals(this.toTime);
     }
 
     @Override
     public String toString() {
-        String s =
-                "Room: " + this.room.getName() +"\n" +
-                "Student: " + this.student.getFullName() +"\n" +
-                "Date: " + this.date.toString() +"\n" +
-                "Booked from " + this.fromTime + " to " + this.toTime + "\n" +
-                "Active: " + this.active;
-
+        String s = this.date + " at " + this.fromTime + " - " +
+                this.toTime + " by " + this.student.getFullName() + " at " + this.room.getName();
         return s;
     }
 }
