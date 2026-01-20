@@ -1,8 +1,0 @@
-- [x] Set up reservation page
-- [x] Make reservation take the logged in user as student
-- [x] Make reservation history a database
-- [x] Make staff accounts use different Hua IDs
-- [x] Check schelduling conflics between reservations when submitting
-- [x] Implement Staff specific functions
-- [x] Implement cancelling reservation by staff
-- [ ] Add final data input checks

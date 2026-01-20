@@ -23,5 +23,8 @@
   </ul>
 
   <hr>
-  <a th:href="@{/modifyStudyRoom}">Modify a room</a>
+  <a th:href="@{profile}">Profile</a>
+  <div th:if="${me.type().toString() == 'STAFF'}">
+    <a th:href="@{/modifyStudyRoom}">Modify a room</a>
+  </div>
 </section>

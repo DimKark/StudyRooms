@@ -47,9 +47,11 @@ public class StaffController {
                                     final Model model) {
         if (!AuthUtils.isAuthenticated(authentication)) return "redirect:/login";
 
+        /*
         CurrentUser me = (CurrentUser) model.getAttribute("me");
         if (me == null) throw new NullPointerException("Current user is null");
         if (!me.type().toString().equals("STAFF")) return "redirect:/profile";
+        */
 
         List<StudyRoom> rooms = this.studyRoomRepository.findAll();
         if (rooms.isEmpty()) {
